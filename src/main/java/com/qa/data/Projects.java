@@ -66,7 +66,7 @@ public class Projects {
 		this.projectMaterials = projectMaterials;
 	}
 
-	public boolean isEasy() {
+	public boolean getEasy() {
 		return easy;
 	}
 
