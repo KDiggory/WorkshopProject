@@ -32,8 +32,8 @@ public class WorkshopController {
 	}
 	
 	@GetMapping("/getAllWoprkshops") 
-	public List<Workshop> getAllIds() {
-		return this.service.getAllIds();	
+	public List<Workshop> getAll() {
+		return this.service.getAll();	
 	}
 	
 	@PostMapping("/createWorkshop") 
