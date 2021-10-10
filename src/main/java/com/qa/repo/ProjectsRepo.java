@@ -2,31 +2,21 @@ package com.qa.repo;
 
 import java.util.List;
 import java.util.Optional;
-
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import com.qa.data.Projects;
 
-public class ProjectsRepo {
+@Repository
+public interface ProjectsRepo extends JpaRepository<Projects, Integer> {
 
 
 
-	public Optional<Projects> findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	 Optional<Projects> findById(Integer id); 
 
-	public List<Projects> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	 List<Projects> findAll();
 
-	public Projects save(Projects project) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	 Projects save(Projects project); 
 
-	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void deleteById(Integer id);
 
 }
