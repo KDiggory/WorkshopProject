@@ -1,6 +1,7 @@
 package com.qa.data;
 
 
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -69,6 +70,14 @@ public class Workshop {
 
 	public void setWorkshop(List<Workshop> workshop) {
 		this.workshop = workshop;
+	}
+
+	public Class<? extends Annotation> annotationType() {
+		return null;
+	}
+
+	public String value() {
+		return null;
 	}
 	
 }
