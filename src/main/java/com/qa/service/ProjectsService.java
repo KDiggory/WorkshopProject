@@ -34,7 +34,7 @@ public class ProjectsService {
 		return this.repo.save(project);
 	}
 
-	public com.qa.data.Projects updateProject(Projects project, Integer id) {
+	public Projects updateProject(Projects project, Integer id) {
 		Projects toUpdate = this.repo.findById(id).get();
 		toUpdate.setProjectName(project.getProjectName());
 		toUpdate.setEasy(project.getEasy());
