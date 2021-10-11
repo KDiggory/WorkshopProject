@@ -26,12 +26,12 @@ public class WorkshopController {
 		this.service = service;
 	}
 	
-	@GetMapping("/getWoprkshopById/{id}") 
+	@GetMapping("/getWorkshopById/{id}") 
 	public Optional<Workshop> getByIndex(@PathVariable Integer id) {
 		return this.service.getByIndex(id);	
 	}
 	
-	@GetMapping("/getAllWoprkshops") 
+	@GetMapping("/getAllWorkshops") 
 	public List<Workshop> getAllWorkshops() {
 		return this.service.getAllWorkshops();	
 	}
@@ -46,7 +46,7 @@ public class WorkshopController {
 	public ResponseEntity<Workshop> updateWorkshop(@RequestBody Workshop workshop, @PathVariable Integer id) {
 	Workshop responseBody = this.service.updateWorkshop(workshop, id);
 	ResponseEntity<Workshop> response = new ResponseEntity<Workshop>(responseBody, HttpStatus.ACCEPTED);
-	return response;	
+	return response;	 
 	}
 	
 	@DeleteMapping("/removeWorkshop/{id}")

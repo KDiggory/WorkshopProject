@@ -1,6 +1,7 @@
 package com.qa;
 
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -64,7 +65,7 @@ public class ProjectsIntegrationTest {
 }
 	@Test
 	void testGetAll() throws Exception {
-		final Projects project = new Projects(1, "Desk", "Oak", true, 2, null);
+		final Projects project = new Projects(null, "Desk", "Oak", true, 2, null);
 		String testProjectAsJson = this.mapper.writeValueAsString(project);
 		
 		RequestBuilder requestGet = get("/getAllProjects").contentType(MediaType.APPLICATION_JSON).content(testProjectAsJson);
@@ -87,4 +88,13 @@ public class ProjectsIntegrationTest {
 		this.mvc.perform(requestGet).andExpect(checkStatusGet).andExpect(checkContentGet); 
 	}
 	
+	@Test
+	void testRemoveProject() throws Exception {
+		
+		RequestBuilder requestDel = delete("/removeProject/{id}", 1).contentType(MediaType.APPLICATION_JSON);
+		
+		ResultMatcher checkStatusGet = status().isNoContent();
+		
+		this.mvc.perform(requestDel).andExpect(checkStatusGet);
+	}
 }
