@@ -16,23 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Workshop {
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(workshop, workshopAddress, workshopId, workshopName);
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Workshop other = (Workshop) obj;
-		return Objects.equals(workshop, other.workshop) && Objects.equals(workshopAddress, other.workshopAddress)
-				&& Objects.equals(workshopId, other.workshopId) && Objects.equals(workshopName, other.workshopName);
-	}
 
 
 	@Id
@@ -96,6 +80,23 @@ public class Workshop {
 
 	public String value() {
 		return null;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(workshop, workshopAddress, workshopId, workshopName);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Workshop other = (Workshop) obj;
+		return Objects.equals(workshop, other.workshop) && Objects.equals(workshopAddress, other.workshopAddress)
+				&& Objects.equals(workshopId, other.workshopId) && Objects.equals(workshopName, other.workshopName);
 	}
 	 
 	

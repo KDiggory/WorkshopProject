@@ -1,4 +1,4 @@
-package com.qa.controller;
+package com.qa.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +19,7 @@ import com.qa.service.ProjectsService;
 
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ProjectsControllerTest {
+public class ProjectsServiceTest {
 	
 	@Autowired
 	private ProjectsService service;
