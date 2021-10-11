@@ -44,8 +44,10 @@ public class ProjectsService {
 		return this.repo.save(toUpdate);
 	}
 	
-	public void deleteProject(Integer id, Object object) {
+	public boolean deleteProject(Integer id, Object object) {
 		this.repo.deleteById(id);
+		boolean exists = this.repo.existsById(id);
+		return !exists;
 	}
 	
 	public ProjectsRepo getRepo() {
@@ -65,6 +67,6 @@ public class ProjectsService {
 	}
 
 	
-}
+} 
 
 

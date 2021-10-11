@@ -51,11 +51,14 @@ public class WorkshopController {
 	
 	@DeleteMapping("/removeWorkshop/{id}")
 	public ResponseEntity<Workshop> deleteWorkshop(@PathVariable Integer id) {
-	this.service.deleteWorkshop(id);
-	ResponseEntity<Workshop> response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	return response;
+		boolean deleted = this.service.deleteWorkshop(id);
+		if(deleted) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	
 	
+	}
 
 }

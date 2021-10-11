@@ -57,12 +57,12 @@ public class WorkshopServiceTest {
 		Workshop workshop = new Workshop(id, "Katies Workshop", "The Garage" , null);
 		Optional<Workshop> optionalWorkshop = Optional.of(workshop);
 
-		Workshop newWorkshop = new Workshop(id, "Katies other Workshop", "The kitchen table" , null);
+		Workshop newWorkshop = new Workshop(id, "Katies Workshop", "The Garage" , null);
 
 		Mockito.when(this.repo.findById(id)).thenReturn(optionalWorkshop);
 		Mockito.when(this.repo.save(newWorkshop)).thenReturn(newWorkshop);
 
-		assertThat(this.service.updateWorkshop(newWorkshop, workshop.getWorkshopId()).equals(newWorkshop));
+		assertThat(this.service.updateWorkshop(newWorkshop, workshop.getWorkshopId(id)).equals(newWorkshop));
 
 		Mockito.verify(this.repo, Mockito.times(1)).findById(id);
 		Mockito.verify(this.repo, Mockito.times(1)).save(newWorkshop);

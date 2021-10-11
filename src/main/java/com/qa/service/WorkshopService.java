@@ -1,6 +1,7 @@
 package com.qa.service;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -30,8 +31,10 @@ public class WorkshopService {
 		return this.repo.save(workshop);  
 	}
 
-	public void deleteWorkshop(Integer id) {
+	public boolean deleteWorkshop(Integer id) {
 		this.repo.deleteById(id);
+		boolean exists = this.repo.existsById(id);
+		return !exists;
 		
 	}
 

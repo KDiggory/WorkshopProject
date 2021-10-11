@@ -43,7 +43,7 @@ public class Workshop {
 	super();
 	}
 
-	public Integer getWorkshopId() {
+	public Integer getWorkshopId(Integer id) {
 		return workshopId;
 	}
 
@@ -98,6 +98,6 @@ public class Workshop {
 		return Objects.equals(workshop, other.workshop) && Objects.equals(workshopAddress, other.workshopAddress)
 				&& Objects.equals(workshopId, other.workshopId) && Objects.equals(workshopName, other.workshopName);
 	}
-	 
+	  
 	
 }

@@ -47,7 +47,7 @@ public class ProjectsIntegrationTest {
 		
 		this.mvc.perform(request).andExpect(checkStatus).andExpect(checkContent); 
 	
-	}
+	} 
 	
 	@Test
 	void testUpdate() throws Exception {

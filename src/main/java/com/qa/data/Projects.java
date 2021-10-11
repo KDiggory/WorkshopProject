@@ -23,6 +23,8 @@ public class Projects {
 	
 	private boolean easy;
 	
+	private Integer days;
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -37,7 +39,7 @@ public class Projects {
 				&& Objects.equals(projectName, other.projectName) && Objects.equals(workshop, other.workshop);
 	}
 
-	private Integer days;
+	
 	
 	
 	@ManyToOne

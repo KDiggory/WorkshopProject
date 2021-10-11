@@ -1,6 +1,7 @@
 package com.qa.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.data.Projects;
+
 import com.qa.service.ProjectsService;
 
 @RestController
 public class ProjectsController {
 	
 	private ProjectsService service;
+	
 	
 	public ProjectsController(ProjectsService service) {
 		super();
@@ -34,7 +37,7 @@ public class ProjectsController {
 	
 	@GetMapping("/getAllProjects")
 	public List<Projects> getAllProjects() {
-		service.getAllProjects().forEach(n -> System.out.println(n));
+		service.getAllProjects().forEach(n -> System.out.println(n)); 
 		return this.service.getAllProjects();
 		
 	}
@@ -55,8 +58,13 @@ public class ProjectsController {
 	
 	@DeleteMapping("/removeProject/{id}")
 	public ResponseEntity<Projects> deleteProject(@PathVariable Integer id) {
-	ResponseEntity<Projects> response = new ResponseEntity<>( HttpStatus.NO_CONTENT);	
-	return response;
+	boolean deleted = this.service.deleteProject(id, null);
+	if(deleted) {
+		return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+	} else {
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); 
+	}
+
 		
 } 
 
