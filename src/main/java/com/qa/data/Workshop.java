@@ -1,17 +1,16 @@
 package com.qa.data;
 
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.springframework.data.annotation.Id;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Workshop {
@@ -52,6 +51,10 @@ public class Workshop {
 		return workshopName;
 	}
 
+	public List<Workshop> getWorkshop() {
+		return workshop;
+	}
+
 	public void setWorkshopName(String workshopName) {
 		this.workshopName = workshopName;
 	}
@@ -64,20 +67,16 @@ public class Workshop {
 		this.workshopAddress = workshopAddress;
 	}
 
-	public List<Workshop> getWorkshop() {
-		return workshop;
-	}
+
 
 	public void setWorkshop(List<Workshop> workshop) {
 		this.workshop = workshop;
 	}
 
-	public Class<? extends Annotation> annotationType() {
-		return null;
-	}
 
 	public String value() {
 		return null;
 	}
+	 
 	
 }

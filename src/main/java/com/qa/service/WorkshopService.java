@@ -22,7 +22,7 @@ public class WorkshopService {
 		return this.repo.findById(id);
 	}
 
-	public List<com.qa.data.Workshop> getAll() {
+	public List<Workshop> getAllWorkshops() {
 		return this.repo.findAll();
 	}
 
