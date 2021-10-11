@@ -19,7 +19,7 @@ public class WorkshopService {
 	}
 
 	public Optional<Workshop> getByIndex(Integer id) {
-		return this.repo.findById(id);
+		return this.repo.findById(id); //orElseThrow in here
 	}
 
 	public List<Workshop> getAllWorkshops() {

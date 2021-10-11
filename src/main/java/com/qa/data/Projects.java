@@ -1,5 +1,7 @@
 package com.qa.data;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -21,6 +23,20 @@ public class Projects {
 	
 	private boolean easy;
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Projects other = (Projects) obj;
+		return Objects.equals(days, other.days) && easy == other.easy && Objects.equals(projectId, other.projectId)
+				&& Objects.equals(projectMaterials, other.projectMaterials)
+				&& Objects.equals(projectName, other.projectName) && Objects.equals(workshop, other.workshop);
+	}
+
 	private Integer days;
 	
 	
@@ -90,5 +106,11 @@ public class Projects {
 	public void setWorkshop(Workshop workshop) {
 		this.workshop = workshop;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(days, easy, projectId, projectMaterials, projectName, workshop);
+	}
+
 	
 }
