@@ -27,7 +27,7 @@ public class Projects {
 	
 	private Integer days;
 	
-	@ManyToOne
+	@ManyToOne 
 	private Workshop workshop;
 
 	public Projects(Integer id, String name, String materials, String easy, Integer days, Workshop workshop) {
