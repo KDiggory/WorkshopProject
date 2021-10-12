@@ -2,7 +2,9 @@ package com.qa.data;
 
 
 import java.util.List;
+import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,68 +17,82 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Workshop {
 
+
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer workshopId;
+	private Integer id;
 	
-	private String workshopName;
+	private String name;
 	
-	private String workshopAddress;
+	private String address;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "workshop")
-	private List<Workshop> workshop;
+	private List<Projects> project;
 
-	public Workshop(Integer workshopId, String workshopName, String workshopAddress, List<Workshop> workshop) {
-		super();
-		this.workshopId = workshopId;
-		this.workshopName = workshopName;
-		this.workshopAddress = workshopAddress;
-		this.workshop = workshop;
-	}
-	
 	public Workshop() {
-	super();
-	}
-
-	public Integer getWorkshopId() {
-		return workshopId;
-	}
-
-	public void setWorkshopId(Integer workshopId) {
-		this.workshopId = workshopId;
-	}
-
-	public String getWorkshopName() {
-		return workshopName;
-	}
-
-	public List<Workshop> getWorkshop() {
-		return workshop;
-	}
-
-	public void setWorkshopName(String workshopName) {
-		this.workshopName = workshopName;
-	}
-
-	public String getWorkshopAddress() {
-		return workshopAddress;
-	}
-
-	public void setWorkshopAddress(String workshopAddress) {
-		this.workshopAddress = workshopAddress;
-	}
-
-
-
-	public void setWorkshop(List<Workshop> workshop) {
-		this.workshop = workshop;
-	}
-
-
-	public String value() {
-		return null;
-	}
-	 
+		super();
 	
+	}
+
+	public Workshop(Integer id, String name, String address, List<Projects> project) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.project = project;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+ 
+	public List<Projects> getProject() {
+		return project;
+	}
+
+	public void setProject(List<Projects> project) {
+		this.project = project;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(address, id, name, project);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Workshop other = (Workshop) obj;
+		return Objects.equals(address, other.address) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name) && Objects.equals(project, other.project);
+	}
+
 }

@@ -1,10 +1,16 @@
 package com.qa.service;
 
 import java.util.List;
+
+
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+
+import com.qa.data.Projects;
 import com.qa.data.Workshop;
+import com.qa.exceptions.ProjectNotFoundException;
+import com.qa.exceptions.WorkshopNotFoundException;
 import com.qa.repo.WorkshopRepo;
 
 @Service
@@ -14,13 +20,19 @@ public class WorkshopService {
 	private Workshop workshop;
 	
 	public WorkshopService(WorkshopRepo repo) {
-		super();
+		super(); 
 		this.repo = repo;
 	}
 
-	public Optional<Workshop> getByIndex(Integer id) {
-		return this.repo.findById(id);
+	public Workshop getByIndex(Integer id) {
+		Workshop saved = this.repo.findById(id).orElseThrow(() -> {
+		      
+		       return new WorkshopNotFoundException("No workshop found with that id");
+		});
+		return saved;
 	}
+	
+ 
 
 	public List<Workshop> getAllWorkshops() {
 		return this.repo.findAll();
@@ -30,15 +42,17 @@ public class WorkshopService {
 		return this.repo.save(workshop);  
 	}
 
-	public void deleteWorkshop(Integer id) {
+	public boolean deleteWorkshop(Integer id) {
 		this.repo.deleteById(id);
+		boolean exists = this.repo.existsById(id);
+		return !exists;
 		
 	}
 
 	public Workshop updateWorkshop(Workshop workshop, Integer id) {
 		Workshop toUpdate = this.repo.findById(id).get();
-		toUpdate.setWorkshopName(workshop.getWorkshopName());
-		toUpdate.setWorkshopAddress(workshop.getWorkshopAddress());
+		toUpdate.setName(workshop.getName());
+		toUpdate.setAddress(workshop.getAddress());
 		return this.repo.save(toUpdate);
 	}
 	public Object getWorkshop() {
