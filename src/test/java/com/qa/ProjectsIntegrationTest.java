@@ -97,6 +97,41 @@ public class ProjectsIntegrationTest {
 	}
 	
 	@Test
+	void testGetByName() throws Exception {
+		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null);
+		String testProjectAsJson = this.mapper.writeValueAsString(List.of(project));
+		
+		RequestBuilder requestGet = get("/getProjectByName/Bookcase");
+	
+		ResultMatcher checkStatusGet = status().isOk();
+		ResultMatcher checkContentGet = content().json(testProjectAsJson);
+		this.mvc.perform(requestGet).andExpect(checkStatusGet).andExpect(checkContentGet); 
+	}
+	
+	@Test
+	void testGetByWorkshop() throws Exception {
+		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null);
+		String testProjectAsJson = this.mapper.writeValueAsString(List.of(project));
+		
+		RequestBuilder requestGet = get("/getProjectByWorkshop/1");
+	
+		ResultMatcher checkStatusGet = status().isOk();
+		ResultMatcher checkContentGet = content().json(testProjectAsJson);
+		this.mvc.perform(requestGet).andExpect(checkStatusGet).andExpect(checkContentGet); 
+	}
+	
+	@Test
+	void testGetByDays() throws Exception {
+		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null);
+		String testProjectAsJson = this.mapper.writeValueAsString(List.of(project));
+		
+		RequestBuilder requestGet = get("/getProjectByDays/4");
+	
+		ResultMatcher checkStatusGet = status().isOk();
+		ResultMatcher checkContentGet = content().json(testProjectAsJson);
+		this.mvc.perform(requestGet).andExpect(checkStatusGet).andExpect(checkContentGet); 
+	}
+	@Test
 	void testRemoveProject() throws Exception {
 		
 		RequestBuilder requestDel = delete("/removeProject/1").contentType(MediaType.APPLICATION_JSON);

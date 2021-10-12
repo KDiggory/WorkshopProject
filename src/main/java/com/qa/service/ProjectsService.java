@@ -2,12 +2,15 @@ package com.qa.service;
 
 
 import java.util.List;
+import java.util.Optional;
 
+import javax.transaction.Transactional;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.qa.data.Projects;
+
 //import com.qa.dto.ProjectWithWorkshopDTO;
 import com.qa.exceptions.ProjectNotFoundException;
 import com.qa.repo.ProjectsRepo;
@@ -29,8 +32,23 @@ public class ProjectsService {
 		       return new ProjectNotFoundException("No project found with that id");
 		});
 		return saved;
-		
-	}	
+		}	
+	
+	public List<Projects> findByName(String name) {
+		var projects = (List<Projects>) repo.findByName(name);
+		return projects;
+	}
+	
+	public List<Projects> findByDays(Integer days) {
+		var projects = (List<Projects>) repo.findByDays(days);
+		return projects;
+	}
+	public List<Projects> findByWorkshop(Integer id) {
+		var projects = (List<Projects>) repo.findByWorkshop(id);
+		return projects;
+	}
+
+	
 
 	public List<Projects> getAllProjects() {
 		return this.repo.findAll();
@@ -56,8 +74,12 @@ public class ProjectsService {
 		return !exists;
 	}
 	
+	}
 
 	
-} 
+	
+
+	
+
 
 
