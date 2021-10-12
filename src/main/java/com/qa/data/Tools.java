@@ -1,24 +1,17 @@
 package com.qa.data;
 
-public class Tools {
+public interface Tools {
 	
-	public String inWorkshop;
-	
-	public static void type() {
-		
-	}
-	
-	public static void usedFor() {
-		
-	}
-	 public static void needsElectricity() {
-		 
-	 }
-	 public static void dangerLevel() {
-		 
-	 }
-	 public static void extrasNeeded() {
-		 
-	 }
+	public static final Integer id = null;
 
+	public static final String name = "";
+	
+	public static final String usedFor = "";
+	
+	public static final String easy = "";
+	
+	public static final Integer cost = null;
+	
+	public static final String dangerous = "";
+ 
 }

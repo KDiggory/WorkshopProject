@@ -71,7 +71,7 @@ public class ProjectsService {
 		return this.repo.findAll();
 	}
 
-	public Projects createProject(com.qa.data.Projects project) {
+	public Projects createProject(Projects project) {
 		return this.repo.save(project);
 	}
 
