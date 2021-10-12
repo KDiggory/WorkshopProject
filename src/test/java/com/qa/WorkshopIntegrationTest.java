@@ -41,7 +41,7 @@ public class WorkshopIntegrationTest {
 	
 	@Autowired
 	private MockMvc mvc;
-	
+	 
 	@Autowired 
 	ObjectMapper mapper;
 	

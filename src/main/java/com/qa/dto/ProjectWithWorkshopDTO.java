@@ -1,5 +1,7 @@
 package com.qa.dto;
 
+import com.qa.data.Workshop;
+
 public class ProjectWithWorkshopDTO {
 
 	private Integer id;
@@ -8,13 +10,13 @@ public class ProjectWithWorkshopDTO {
 
 	private String projectMaterials;
 
-	private Boolean easy;
+	private String easy;
 	
 	private Integer days;
 
-	private String workshop;
+	private Workshop workshop;
 
-	public ProjectWithWorkshopDTO(Integer id, String projectName, String projectMaterials, Boolean easy, Integer days, String workshop) {
+	public ProjectWithWorkshopDTO(Integer id, String projectName, String projectMaterials, String easy, Integer days, Workshop workshop) {
 		super();
 		this.id = id;
 		this.projectName = projectName;
@@ -52,11 +54,11 @@ public class ProjectWithWorkshopDTO {
 		this.projectMaterials = projectMaterials;
 	}
 
-	public Boolean getEasy() {
+	public String getEasy() {
 		return easy;
 	}
 
-	public void setEasy(Boolean easy) {
+	public void setEasy(String easy) {
 		this.easy = easy;
 	}
 
@@ -68,11 +70,11 @@ public class ProjectWithWorkshopDTO {
 		this.days = days;
 	}
 
-	public String getWorkshop() {
+	public Workshop getWorkshop() {
 		return workshop;
 	}
 
-	public void setWorkshop(String workshop) {
+	public void setWorkshop(Workshop workshop) {
 		this.workshop = workshop;
 	}
 	}

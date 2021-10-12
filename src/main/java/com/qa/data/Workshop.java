@@ -65,7 +65,7 @@ public class Workshop {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(String address) { 
 		this.address = address;
 	}
  

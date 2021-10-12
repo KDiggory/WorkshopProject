@@ -8,26 +8,26 @@ public class ProjectsDTO {
 
 	private String projectMaterials;
 
-	private Boolean easy;
+	private String easy;
 	
 	private Integer days;
 
-	public ProjectsDTO(Integer id, String projectName, String projectMaterials, Boolean easy, Integer days) {
+	public ProjectsDTO(Integer id, String projectName, String projectMaterials, String easy, Integer days) {
 		super();
 		this.id = id;
 		this.projectName = projectName;
 		this.projectMaterials = projectMaterials;
 		this.easy = easy;
-		this.days = days; 
+		this.days = days;
 	}
 
-	public ProjectsDTO() { 
+	public ProjectsDTO() {  
 		super();
 	}
 
 	public Integer getId() {
 		return id;
-	}
+	} 
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -49,11 +49,11 @@ public class ProjectsDTO {
 		this.projectMaterials = projectMaterials;
 	}
 
-	public Boolean getEasy() {
+	public String getEasy() {
 		return easy;
 	}
 
-	public void setEasy(Boolean easy) {
+	public void setEasy(String easy) {
 		this.easy = easy;
 	}
 

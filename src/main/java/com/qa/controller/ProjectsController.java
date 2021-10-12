@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.data.Projects;
 import com.qa.dto.ProjectWithWorkshopDTO;
+import com.qa.dto.ProjectsDTO;
 import com.qa.service.ProjectsService;
 
+@CrossOrigin
 @RestController
 public class ProjectsController {
 	
@@ -34,7 +37,7 @@ public class ProjectsController {
 	}
 	
 	@GetMapping("/getProjectById/{id}")
-	public Projects getProjectByIndex(@PathVariable Integer id) {
+	public ProjectWithWorkshopDTO getProjectByIndex(@PathVariable Integer id) {
 		return this.service.getProjectById(id);
 		
 	}
