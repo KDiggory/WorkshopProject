@@ -1,12 +1,9 @@
 package com.qa.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.beans.BeanInfo;
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
+import org.springframework.test.context.ActiveProfiles;
 
 import com.qa.data.Projects;
 import com.qa.data.Workshop;
 import com.qa.repo.WorkshopRepo;
 
-
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class WorkshopTest {
 	
@@ -54,7 +51,7 @@ public class WorkshopTest {
 
 		Mockito.when(this.repo.findAll()).thenReturn(workshops);
 
-		assertThat(this.service.getAllWorkshops()).isEqualTo(workshops);
+		assertThat(this.service.getAllWorkshops()).isEqualTo(workshops); 
 
 		Mockito.verify(this.repo, Mockito.times(1)).findAll();
 	}
@@ -70,7 +67,7 @@ public class WorkshopTest {
 		Mockito.when(this.repo.findById(id)).thenReturn(optionalWorkshop);
 		Mockito.when(this.repo.save(newWorkshop)).thenReturn(newWorkshop);
 
-		assertThat(this.service.updateWorkshop(newWorkshop, workshop.getWorkshopId(id)).equals(newWorkshop));
+		assertThat(this.service.updateWorkshop(newWorkshop, workshop.getId()).equals(newWorkshop));
 
 		Mockito.verify(this.repo, Mockito.times(1)).findById(id);
 		Mockito.verify(this.repo, Mockito.times(1)).save(newWorkshop);
@@ -102,41 +99,41 @@ public class WorkshopTest {
 	@Test
 	void testSetId()  {
 		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
-		initialWorkshop.setWorkshopId(2);
-		assertEquals(2, initialWorkshop.getWorkshopId(null));
+		initialWorkshop.setId(2);
+		assertEquals(2, initialWorkshop.getId());
 	}
 	@Test
 	void testGetId() {
 		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
-		Integer expected = initialWorkshop.getWorkshopId(null);
+		Integer expected = initialWorkshop.getId();
 		assertEquals(expected, 1);
 	}
 	
 	@Test
 	void testSetName() {
 		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
-		initialWorkshop.setWorkshopName("Katies Extra Workshop");
-		assertEquals("Katies Extra Workshop", initialWorkshop.getWorkshopName());
+		initialWorkshop.setName("Katies Extra Workshop");
+		assertEquals("Katies Extra Workshop", initialWorkshop.getName());
 	}
 	
 	@Test
 	void testGetName() {
 		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
-		String expected = initialWorkshop.getWorkshopName();
+		String expected = initialWorkshop.getName();
 		assertEquals(expected, "Katies Workshop");
 	}
 	
 	@Test
 	void testSetAddress() {
 		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
-		initialWorkshop.setWorkshopAddress("The kitchen table");
-		assertEquals("The kitchen table", initialWorkshop.getWorkshopAddress());
+		initialWorkshop.setAddress("The kitchen table");
+		assertEquals("The kitchen table", initialWorkshop.getAddress());
 	}
 	
 	@Test
 	void testGetAddress() {
 		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
-		String expected = initialWorkshop.getWorkshopAddress();
+		String expected = initialWorkshop.getAddress();
 		assertEquals(expected, "The Garage");
 	}
 	

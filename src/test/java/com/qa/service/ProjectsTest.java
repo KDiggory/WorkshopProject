@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.qa.data.Projects;
 import com.qa.data.Workshop;
@@ -20,15 +21,15 @@ import com.qa.repo.ProjectsRepo;
 import com.qa.service.ProjectsService;
 
 
-
+@ActiveProfiles("test")
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ProjectsTest {
 	
 	@Autowired
-	private ProjectsService service;
+	private ProjectsService service; 
 	
-	@MockBean
+	@MockBean 
 	private ProjectsRepo repo;
 	
 	
@@ -69,7 +70,7 @@ public class ProjectsTest {
 		Mockito.when(this.repo.findById(id)).thenReturn(optionalProject);
 		Mockito.when(this.repo.save(newProject)).thenReturn(newProject);
 
-		assertThat(this.service.updateProject(newProject, project.getProjectId()).equals(newProject));
+		assertThat(this.service.updateProject(newProject, project.getId()).equals(newProject));
 
 		Mockito.verify(this.repo, Mockito.times(1)).findById(id);
 		Mockito.verify(this.repo, Mockito.times(1)).save(newProject);
@@ -101,42 +102,42 @@ public class ProjectsTest {
 	@Test
 	void testSetId() {
 		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
-		initialProject.setProjectId(2);
-		assertEquals(2, initialProject.getProjectId());
+		initialProject.setId(2);
+		assertEquals(2, initialProject.getId());
 	}
 	
 	@Test
 	void testGetId() {
 		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
-		Integer expected = initialProject.getProjectId();
+		Integer expected = initialProject.getId();
 		assertEquals(expected, 1);
 	}
 	
 	@Test
 	void testSetName() {
 		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
-		initialProject.setProjectName("Bookcase");
-		assertEquals("Bookcase", initialProject.getProjectName());
+		initialProject.setName("Bookcase");
+		assertEquals("Bookcase", initialProject.getName());
 	}
 	
 	@Test
 	void testGetName() {
 		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
-		String expected = initialProject.getProjectName();
+		String expected = initialProject.getName();
 		assertEquals(expected, "Desk");
 	}
 	
 	@Test
 	void testSetMaterials() {
 		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
-		initialProject.setProjectMaterials("Oak");
-		assertEquals("Oak", initialProject.getProjectMaterials());
+		initialProject.setMaterials("Oak");
+		assertEquals("Oak", initialProject.getMaterials());
 	}
 	
 	@Test
 	void testGetMaterialse() {
 		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
-		String expected = initialProject.getProjectMaterials();
+		String expected = initialProject.getMaterials();
 		assertEquals(expected, "Walnut");
 	}
 	
@@ -150,7 +151,7 @@ public class ProjectsTest {
 	@Test
 	void testGetEasy() {
 		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
-		Boolean expected = initialProject.getEasy();
+		String expected = initialProject.getEasy();
 		assertEquals(expected, "yes");
 	}
 	

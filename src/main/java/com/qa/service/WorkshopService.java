@@ -20,7 +20,7 @@ public class WorkshopService {
 	private Workshop workshop;
 	
 	public WorkshopService(WorkshopRepo repo) {
-		super();
+		super(); 
 		this.repo = repo;
 	}
 
@@ -32,7 +32,7 @@ public class WorkshopService {
 		return saved;
 	}
 	
-
+ 
 
 	public List<Workshop> getAllWorkshops() {
 		return this.repo.findAll();
@@ -51,8 +51,8 @@ public class WorkshopService {
 
 	public Workshop updateWorkshop(Workshop workshop, Integer id) {
 		Workshop toUpdate = this.repo.findById(id).get();
-		toUpdate.setWorkshopName(workshop.getWorkshopName());
-		toUpdate.setWorkshopAddress(workshop.getWorkshopAddress());
+		toUpdate.setName(workshop.getName());
+		toUpdate.setAddress(workshop.getAddress());
 		return this.repo.save(toUpdate);
 	}
 	public Object getWorkshop() {

@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -54,15 +56,15 @@ public class ProjectsIntegrationTest {
 		this.mvc.perform(request).andExpect(checkStatus).andExpect(checkContent); 
 	
 	} 
-	
+	 
 	@Test
 	void testUpdate() throws Exception {
 		
-		final Projects updatedProject = new Projects(2, "Desk", "Oak", "Yes", 2, null);
+		final Projects updatedProject = new Projects(1, "Desk", "Oak", "Yes", 2, null);
 		String updatedProjectAsJson = this.mapper.writeValueAsString(updatedProject);
 		
 		
-		RequestBuilder requestput = put("/updateProject/{id}", 2).contentType(MediaType.APPLICATION_JSON).content(updatedProjectAsJson);
+		RequestBuilder requestput = put("/updateProject/1").contentType(MediaType.APPLICATION_JSON).content(updatedProjectAsJson);
 		
 		ResultMatcher checkStatusPut = status().isAccepted();
 		ResultMatcher checkContentPut = content().json(updatedProjectAsJson);
@@ -71,10 +73,10 @@ public class ProjectsIntegrationTest {
 }
 	@Test
 	void testGetAll() throws Exception {
-		final Projects project = new Projects(2, "Desk", "Oak", "Yes", 2, null);
-		String testProjectAsJson = this.mapper.writeValueAsString(project);
+		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null);
+		String testProjectAsJson = this.mapper.writeValueAsString(List.of(project));
 		
-		RequestBuilder requestGet = get("/getAllProjects").contentType(MediaType.APPLICATION_JSON).content(testProjectAsJson);
+		RequestBuilder requestGet = get("/getAllProjects"); 
 	
 		ResultMatcher checkStatusGet = status().isOk();
 		ResultMatcher checkContentGet = content().json(testProjectAsJson);
@@ -84,10 +86,10 @@ public class ProjectsIntegrationTest {
 	
 	@Test
 	void testGetById() throws Exception {
-		final Projects project = new Projects(2, "Desk", "Oak", "Yes", 2, null);
+		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null);
 		String testProjectAsJson = this.mapper.writeValueAsString(project);
 		
-		RequestBuilder requestGet = get("/getProjectById/{id}", 1).contentType(MediaType.APPLICATION_JSON).content(testProjectAsJson);
+		RequestBuilder requestGet = get("/getProjectById/1");
 	
 		ResultMatcher checkStatusGet = status().isOk();
 		ResultMatcher checkContentGet = content().json(testProjectAsJson);
@@ -97,7 +99,7 @@ public class ProjectsIntegrationTest {
 	@Test
 	void testRemoveProject() throws Exception {
 		
-		RequestBuilder requestDel = delete("/removeProject/{id}", 1).contentType(MediaType.APPLICATION_JSON);
+		RequestBuilder requestDel = delete("/removeProject/1").contentType(MediaType.APPLICATION_JSON);
 		
 		ResultMatcher checkStatusGet = status().isNoContent();
 		

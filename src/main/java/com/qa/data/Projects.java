@@ -16,75 +16,57 @@ public class Projects {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="project_id")
-	private Integer projectId;
-	@Column(name="project_name")
-	private String projectName;
-	@Column(name="project_materials")
-	private String projectMaterials;
+	
+	private Integer id;
+
+	private String name;
+	
+	private String materials;
 	
 	private String easy;
 	
 	private Integer days;
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Projects other = (Projects) obj;
-		return Objects.equals(days, other.days) && easy == other.easy && Objects.equals(projectId, other.projectId)
-				&& Objects.equals(projectMaterials, other.projectMaterials)
-				&& Objects.equals(projectName, other.projectName) && Objects.equals(workshop, other.workshop);
-	} 
-
-	
-	
-	
 	@ManyToOne
 	private Workshop workshop;
 
-
-	public Projects(Integer projectId, String projectName, String projectMaterials, String easy, Integer days,
-			Workshop workshop) {
+	public Projects(Integer id, String name, String materials, String easy, Integer days, Workshop workshop) {
 		super();
-		this.projectId = projectId;
-		this.projectName = projectName;
-		this.projectMaterials = projectMaterials;
+		this.id = id;
+		this.name = name;
+		this.materials = materials;
 		this.easy = easy;
 		this.days = days;
 		this.workshop = workshop;
 	}
-	
-	public Projects() { // REQUIRED default constructor
+
+	public Projects() { 
 		super();
+		
 	}
 
-	public Integer getProjectId() {
-		return projectId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setProjectId(Integer projectId) {
-		this.projectId = projectId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getProjectName() {
-		return projectName;
+	public String getName() {
+		return name;
 	}
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getProjectMaterials() {
-		return projectMaterials;
+	public String getMaterials() {
+		return materials;
 	}
 
-	public void setProjectMaterials(String projectMaterials) {
-		this.projectMaterials = projectMaterials;
+	public void setMaterials(String materials) {
+		this.materials = materials;
 	}
 
 	public String getEasy() {
@@ -113,8 +95,24 @@ public class Projects {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(days, easy, projectId, projectMaterials, projectName, workshop);
+		return Objects.hash(days, easy, id, materials, name, workshop);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Projects other = (Projects) obj;
+		return Objects.equals(days, other.days) && Objects.equals(easy, other.easy) && Objects.equals(id, other.id)
+				&& Objects.equals(materials, other.materials) && Objects.equals(name, other.name)
+				&& Objects.equals(workshop, other.workshop);
+	}
+	
+
+	
 	
 }

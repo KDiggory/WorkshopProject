@@ -2,6 +2,7 @@ package com.qa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -38,8 +39,6 @@ import com.qa.data.Workshop;
 public class WorkshopIntegrationTest {
 	
 	
-	 
-	
 	@Autowired
 	private MockMvc mvc;
 	
@@ -48,13 +47,13 @@ public class WorkshopIntegrationTest {
 	
 	@Test
 	void testCreate() throws Exception {
-		final Workshop workshop = new Workshop(null, "Katies Workshop", "The garage", null);
-		String testWorkshoptAsJson = this.mapper.writeValueAsString(workshop);
+		final Workshop workshop = new Workshop(2, "Katies Workshop", "The garage", null);
+		String testWorkshopAsJson = this.mapper.writeValueAsString(workshop);
 		
-		final Workshop savedWorkshop = new Workshop(1, "Katies Workshop", "The garage", null);
+		final Workshop savedWorkshop = new Workshop(2, "Katies Workshop", "The garage", null);
 		String savedWorkshopAsJson = this.mapper.writeValueAsString(savedWorkshop);
 		
-		RequestBuilder request = post("/createWorkshop").contentType(MediaType.APPLICATION_JSON).content(testWorkshoptAsJson);
+		RequestBuilder request = post("/createWorkshop").contentType(MediaType.APPLICATION_JSON).content(testWorkshopAsJson);
 		
 		ResultMatcher checkStatus = status().isCreated();
 		ResultMatcher checkContent = content().json(savedWorkshopAsJson);
@@ -79,10 +78,10 @@ public class WorkshopIntegrationTest {
 	
 	@Test
 	void testGetAll() throws Exception {
-		final Workshop workshop = new Workshop(null, "Katies Workshop", "The garage", null);
-		String testWorkshoptAsJson = this.mapper.writeValueAsString(workshop);
+		final Workshop workshop = new Workshop(1, "Katies Workshop", "The Garage", null);
+		String testWorkshoptAsJson = this.mapper.writeValueAsString(List.of(workshop)); 
 		
-		RequestBuilder requestGet = get("/getAllWorkshops").contentType(MediaType.APPLICATION_JSON).content(testWorkshoptAsJson);
+		RequestBuilder requestGet = get("/getAllWorkshops");//.contentType(MediaType.APPLICATION_JSON).content(testWorkshoptAsJson);
 		
 		ResultMatcher checkStatusGet = status().isOk();
 		ResultMatcher checkContentGet = content().json(testWorkshoptAsJson);
@@ -92,16 +91,16 @@ public class WorkshopIntegrationTest {
 	
 	@Test
 	void testGetById() throws Exception {
-		final Workshop workshop = new Workshop(null, "Katies Workshop", "The garage", null);
+		final Workshop workshop = new Workshop(1, "Katies Workshop", "The Garage", null);
 		String testWorkshopAsJson = this.mapper.writeValueAsString(workshop);
 		
-		RequestBuilder requestGet = get("/getProjectById/{id}", 1).contentType(MediaType.APPLICATION_JSON).content(testWorkshopAsJson);
+		RequestBuilder requestGet = get("/getWorkshopById/1");
 	
 		ResultMatcher checkStatusGet = status().isOk();
 		ResultMatcher checkContentGet = content().json(testWorkshopAsJson);
 		this.mvc.perform(requestGet).andExpect(checkStatusGet).andExpect(checkContentGet); 
 	}
-	
+	 
 	
 	@Test
 	void testRemoveWorkshop() throws Exception {
