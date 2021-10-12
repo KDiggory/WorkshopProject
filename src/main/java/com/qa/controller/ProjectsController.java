@@ -39,26 +39,23 @@ public class ProjectsController {
 		
 	}
 	
-	
-	
 	@GetMapping("/getProjectByName/{name}")
-	//@RequestMapping(value = "/name/{name}", method = RequestMethod.GET) 
-	public List<Projects> findByName(@PathVariable String name) { 
-		//service.findByName(name).forEach(n -> System.out.println(n)); 
+	public List<Projects> findByName(@PathVariable String name) {
+		service.findByName(name).forEach(n -> System.out.println(n)); 
 		return this.service.findByName(name);
 		
 	}
 	
 	@GetMapping("/getProjectByWorkshop/{id}")
 	public List<Projects> findByWorkshop(@PathVariable Integer id) { 
-		//service.findByWorkshop(id).forEach(n -> System.out.println(n)); 
+		service.findByWorkshop(id).forEach(n -> System.out.println(n)); 
 		return this.service.findByWorkshop(id);
 		
 	}
 	
 	@GetMapping("/getProjectByDays/{days}")
 	public List<Projects> findByDays(@PathVariable Integer days) { 
-		//service.findByDays(days).forEach(n -> System.out.println(n)); 
+		service.findByDays(days).forEach(n -> System.out.println(n)); 
 		return this.service.findByDays(days);
 		
 	}

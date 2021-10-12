@@ -45,7 +45,49 @@ public class ProjectsTest {
 		assertThat(this.service.getProjectById(id)).isEqualTo(project);
 
 		Mockito.verify(this.repo, Mockito.times(1)).findById(id);
-	}
+	} 
+	
+	@Test
+	void testGetByName() {
+		final String name = "Desk";
+		final List<Projects> projects = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null),
+				new Projects(2, "Desk", "Pine", "yes", 2, null));
+		
+		
+		Mockito.when(this.repo.findByName(name)).thenReturn(projects);
+
+		assertThat(this.service.findByName(name)).isEqualTo(projects);
+
+		Mockito.verify(this.repo, Mockito.times(1)).findByName(name);
+	} 
+	
+	@Test
+	void testGetByDays() {
+		final Integer days = 2;
+		final List<Projects> projects = List.of(new Projects(1, "Desk", "Walnut", "yes", 2, null),
+				new Projects(2, "Desk", "Pine", "yes", 2, null));
+		
+		
+		Mockito.when(this.repo.findByDays(days)).thenReturn(projects);
+
+		assertThat(this.service.findByDays(days)).isEqualTo(projects);
+
+		Mockito.verify(this.repo, Mockito.times(1)).findByDays(days);
+	} 
+	
+	@Test
+	void testGetByWorkshop() {
+		final Integer id = null;
+		final List<Projects> projects = List.of(new Projects(1, "Desk", "Walnut", "yes", 2, null),
+				new Projects(2, "Desk", "Pine", "yes", 2, null));
+		
+		
+		Mockito.when(this.repo.findByWorkshop(id)).thenReturn(projects);
+
+		assertThat(this.service.findByWorkshop(id)).isEqualTo(projects);
+
+		Mockito.verify(this.repo, Mockito.times(1)).findByWorkshop(id);
+	} 
 	
 	@Test
 	void testGetAllProjects() {

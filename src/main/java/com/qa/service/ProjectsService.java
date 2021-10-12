@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.qa.data.Projects;
-import com.qa.dto.SearchDTO;
+
 //import com.qa.dto.ProjectWithWorkshopDTO;
 import com.qa.exceptions.ProjectNotFoundException;
 import com.qa.repo.ProjectsRepo;
