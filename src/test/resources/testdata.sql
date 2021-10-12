@@ -1,9 +1,9 @@
 insert into workshop 
-	(workshopName, workshopAddress) 
+	(workshop_name, workshop_address) 
 		values
 	('Katies Workshop', 'The Garage');
 	
 	insert into projects 
-	(projectName, projectMaterials, easy, days) 
+	(project_name, project_materials, easy, days) 
 		values
-	('Bookcase', 'Oak', 'true', '4');
+	('Bookcase', 'Oak', 'yes', '4');

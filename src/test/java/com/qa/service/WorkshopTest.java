@@ -1,7 +1,12 @@
 package com.qa.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.beans.BeanInfo;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,12 +17,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+
 import com.qa.data.Projects;
 import com.qa.data.Workshop;
 import com.qa.repo.WorkshopRepo;
 
+
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class WorkshopServiceTest {
+public class WorkshopTest {
 	
 	@Autowired
 	private WorkshopService service;
@@ -25,16 +32,17 @@ public class WorkshopServiceTest {
 	@MockBean
 	private WorkshopRepo repo; 
 	
+	
+	
 	@Test
 	void testGetById() {
 		final Integer id = 1;
 
 		final Workshop workshop = new Workshop(id, "Katies Workshop", "The Garage" , null);
-		Optional<Workshop> optionalWorkshop = Optional.of(workshop);
 		
-		Mockito.when(this.repo.findById(id)).thenReturn(optionalWorkshop);
+		Mockito.when(this.repo.findById(id)).thenReturn(Optional.of(workshop));
 
-		assertThat(this.service.getByIndex(id)).isEqualTo(optionalWorkshop);
+		assertThat(this.service.getByIndex(id)).isEqualTo(workshop);
 
 		Mockito.verify(this.repo, Mockito.times(1)).findById(id);
 	}
@@ -90,4 +98,86 @@ public class WorkshopServiceTest {
 
 		Mockito.verify(this.repo, Mockito.times(1)).existsById(id);
 	}
+	
+	@Test
+	void testSetId()  {
+		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
+		initialWorkshop.setWorkshopId(2);
+		assertEquals(2, initialWorkshop.getWorkshopId(null));
+	}
+	@Test
+	void testGetId() {
+		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
+		Integer expected = initialWorkshop.getWorkshopId(null);
+		assertEquals(expected, 1);
+	}
+	
+	@Test
+	void testSetName() {
+		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
+		initialWorkshop.setWorkshopName("Katies Extra Workshop");
+		assertEquals("Katies Extra Workshop", initialWorkshop.getWorkshopName());
+	}
+	
+	@Test
+	void testGetName() {
+		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
+		String expected = initialWorkshop.getWorkshopName();
+		assertEquals(expected, "Katies Workshop");
+	}
+	
+	@Test
+	void testSetAddress() {
+		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
+		initialWorkshop.setWorkshopAddress("The kitchen table");
+		assertEquals("The kitchen table", initialWorkshop.getWorkshopAddress());
+	}
+	
+	@Test
+	void testGetAddress() {
+		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
+		String expected = initialWorkshop.getWorkshopAddress();
+		assertEquals(expected, "The Garage");
+	}
+	
+	@Test
+	public void testEquals_Symmetric() {
+		Workshop workshop1 = new Workshop(1, "Katies Workshop", "The Garage" , null);  // equals and hashCode check name field value
+		Workshop workshop2 = new Workshop(1, "Katies Workshop", "The Garage" , null);
+	    assertThat(workshop1.equals(workshop2) && workshop2.equals(workshop1));
+	    assertThat(workshop1.hashCode() == workshop2.hashCode());
+	}
+	
+//	@Test
+//	void testSetWorkshop() {
+//		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
+//		initialWorkshop.setWorkshop(null); 
+//		assertEquals(null, initialWorkshop.getWorkshop());
+//	}
+//	
+//	@Test
+//	void testGetWorkshop() {
+//		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
+//		List<Workshop> expected = initialWorkshop.getWorkshop();
+//		assertEquals(expected, null);
+//	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

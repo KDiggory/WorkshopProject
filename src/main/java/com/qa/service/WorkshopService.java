@@ -2,10 +2,15 @@ package com.qa.service;
 
 import java.util.List;
 
+
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+
+import com.qa.data.Projects;
 import com.qa.data.Workshop;
+import com.qa.exceptions.ProjectNotFoundException;
+import com.qa.exceptions.WorkshopNotFoundException;
 import com.qa.repo.WorkshopRepo;
 
 @Service
@@ -19,9 +24,15 @@ public class WorkshopService {
 		this.repo = repo;
 	}
 
-	public Optional<Workshop> getByIndex(Integer id) {
-		return this.repo.findById(id); //orElseThrow in here
+	public Workshop getByIndex(Integer id) {
+		Workshop saved = this.repo.findById(id).orElseThrow(() -> {
+		      
+		       return new WorkshopNotFoundException("No workshop found with that id");
+		});
+		return saved;
 	}
+	
+
 
 	public List<Workshop> getAllWorkshops() {
 		return this.repo.findAll();

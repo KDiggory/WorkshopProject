@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.data.Projects;
-
+import com.qa.dto.ProjectWithWorkshopDTO;
 import com.qa.service.ProjectsService;
 
 @RestController
@@ -30,7 +30,7 @@ public class ProjectsController {
 	}
 	
 	@GetMapping("/getProjectById/{id}")
-	public Optional<Projects> getProjectByIndex(@PathVariable Integer id) {
+	public Projects getProjectByIndex(@PathVariable Integer id) {
 		return this.service.getProjectById(id);
 		
 	}

@@ -1,19 +1,30 @@
 package com.qa.service;
 
+import java.lang.System.Logger;
 import java.lang.annotation.Annotation;
+
+
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.qa.data.Projects;
+//import com.qa.dto.ProjectWithWorkshopDTO;
+import com.qa.exceptions.ProjectNotFoundException;
 import com.qa.repo.ProjectsRepo;
+
+
+
 
 
 @Primary
 @Service
 public class ProjectsService {
+	
+	
+	
 	
 	public ProjectsRepo repo;
 	
@@ -22,9 +33,19 @@ public class ProjectsService {
 		this.repo = repo;
 	}
 
-	public Optional<Projects> getProjectById(Integer id) {
-		return this.repo.findById(id);
+	public Projects getProjectById(Integer id) {
+		Projects saved = this.repo.findById(id).orElseThrow(() -> {
+		      
+		       return new ProjectNotFoundException("No project found with that id");
+		});
+		return saved;
+		
 	}
+		//new ProjectNotFoundException("No project found with that id")));  
+		// why is this not working??
+		// return saved;
+		//return this.mapToDTO(foundProject); 
+	 
 
 	public List<Projects> getAllProjects() {
 		return this.repo.findAll();

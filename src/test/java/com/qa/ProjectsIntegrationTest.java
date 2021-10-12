@@ -14,6 +14,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -24,6 +27,9 @@ import com.qa.data.Projects;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
+@Sql(scripts = { "classpath:testschema.sql",
+"classpath:testdata.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 public class ProjectsIntegrationTest {
 	
 	@Autowired
@@ -34,11 +40,11 @@ public class ProjectsIntegrationTest {
 	
 	@Test
 	void testCreate() throws Exception {
-		final Projects project = new Projects(null, "Desk", "Walnut", true, 3, null);
+		final Projects project = new Projects(2, "Desk", "Walnut", "Yes", 3, null);
 		String testProjectAsJson = this.mapper.writeValueAsString(project);
 		
-		final Projects savedProject = new Projects(1, "Desk", "Walnut", true, 3, null);
-		String savedProjectAsJson = this.mapper.writeValueAsString(savedProject);
+		final Projects savedProject = new Projects(2, "Desk", "Walnut", "Yes", 3, null);
+		String savedProjectAsJson = this.mapper.writeValueAsString(savedProject); 
 		
 		RequestBuilder request = post("/createProject").contentType(MediaType.APPLICATION_JSON).content(testProjectAsJson);
 		
@@ -52,11 +58,11 @@ public class ProjectsIntegrationTest {
 	@Test
 	void testUpdate() throws Exception {
 		
-		final Projects updatedProject = new Projects(1, "Desk", "Oak", true, 2, null);
+		final Projects updatedProject = new Projects(2, "Desk", "Oak", "Yes", 2, null);
 		String updatedProjectAsJson = this.mapper.writeValueAsString(updatedProject);
 		
 		
-		RequestBuilder requestput = put("/updateProject/{id}", 1).contentType(MediaType.APPLICATION_JSON).content(updatedProjectAsJson);
+		RequestBuilder requestput = put("/updateProject/{id}", 2).contentType(MediaType.APPLICATION_JSON).content(updatedProjectAsJson);
 		
 		ResultMatcher checkStatusPut = status().isAccepted();
 		ResultMatcher checkContentPut = content().json(updatedProjectAsJson);
@@ -65,7 +71,7 @@ public class ProjectsIntegrationTest {
 }
 	@Test
 	void testGetAll() throws Exception {
-		final Projects project = new Projects(null, "Desk", "Oak", true, 2, null);
+		final Projects project = new Projects(2, "Desk", "Oak", "Yes", 2, null);
 		String testProjectAsJson = this.mapper.writeValueAsString(project);
 		
 		RequestBuilder requestGet = get("/getAllProjects").contentType(MediaType.APPLICATION_JSON).content(testProjectAsJson);
@@ -78,7 +84,7 @@ public class ProjectsIntegrationTest {
 	
 	@Test
 	void testGetById() throws Exception {
-		final Projects project = new Projects(1, "Desk", "Oak", true, 2, null);
+		final Projects project = new Projects(2, "Desk", "Oak", "Yes", 2, null);
 		String testProjectAsJson = this.mapper.writeValueAsString(project);
 		
 		RequestBuilder requestGet = get("/getProjectById/{id}", 1).contentType(MediaType.APPLICATION_JSON).content(testProjectAsJson);

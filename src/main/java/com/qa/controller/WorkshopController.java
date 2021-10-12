@@ -27,7 +27,7 @@ public class WorkshopController {
 	}
 	
 	@GetMapping("/getWorkshopById/{id}") 
-	public Optional<Workshop> getByIndex(@PathVariable Integer id) {
+	public Workshop getByIndex(@PathVariable Integer id) {
 		return this.service.getByIndex(id);	
 	}
 	

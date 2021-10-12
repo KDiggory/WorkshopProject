@@ -4,6 +4,7 @@ package com.qa.data;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,10 +22,11 @@ public class Workshop {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="workshop_id")
 	private Integer workshopId;
-	
+	@Column(name="workshop_name")
 	private String workshopName;
-	
+	@Column(name="workshop_address")
 	private String workshopAddress;
 	
 	@JsonIgnore

@@ -2,6 +2,7 @@ package com.qa.data;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -15,13 +16,14 @@ public class Projects {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="project_id")
 	private Integer projectId;
-	
+	@Column(name="project_name")
 	private String projectName;
-	
+	@Column(name="project_materials")
 	private String projectMaterials;
 	
-	private boolean easy;
+	private String easy;
 	
 	private Integer days;
 	
@@ -37,7 +39,7 @@ public class Projects {
 		return Objects.equals(days, other.days) && easy == other.easy && Objects.equals(projectId, other.projectId)
 				&& Objects.equals(projectMaterials, other.projectMaterials)
 				&& Objects.equals(projectName, other.projectName) && Objects.equals(workshop, other.workshop);
-	}
+	} 
 
 	
 	
@@ -46,7 +48,7 @@ public class Projects {
 	private Workshop workshop;
 
 
-	public Projects(Integer projectId, String projectName, String projectMaterials, boolean easy, Integer days,
+	public Projects(Integer projectId, String projectName, String projectMaterials, String easy, Integer days,
 			Workshop workshop) {
 		super();
 		this.projectId = projectId;
@@ -85,11 +87,11 @@ public class Projects {
 		this.projectMaterials = projectMaterials;
 	}
 
-	public boolean getEasy() {
+	public String getEasy() {
 		return easy;
 	}
 
-	public void setEasy(boolean easy) {
+	public void setEasy(String easy) {
 		this.easy = easy;
 	}
 
