@@ -3,12 +3,13 @@ package com.qa.service;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
 import com.qa.data.PowerTools;
 import com.qa.data.Projects;
 import com.qa.exceptions.ProjectNotFoundException;
 import com.qa.repo.PowerToolsRepo;
-
+@Service
 public class PowerToolsService {
 	
 	public PowerToolsRepo repo;
@@ -18,14 +19,14 @@ public class PowerToolsService {
 	public PowerToolsService(PowerToolsRepo repo, ModelMapper mapper ) {
 		super();
 		this.repo = repo;
-		this.mapper = mapper;
+		this.mapper = mapper; 
 	}
 
 	public PowerTools createPowerTool(PowerTools powertool) {
 		return this.repo.save(powertool);
 	}
 	
-	public PowerTools updateProject(PowerTools powertool, Integer id) {
+	public PowerTools updatePowerTool(PowerTools powertool, Integer id) {
 		PowerTools toUpdate = this.repo.findById(id).get();
 		toUpdate.setName(powertool.getName());
 		toUpdate.setEasy(powertool.getEasy());
@@ -33,7 +34,7 @@ public class PowerToolsService {
 		toUpdate.setCost(powertool.getCost());
 		toUpdate.setDangerous(powertool.getDangerous());
 		toUpdate.setId(powertool.getId());
-		toUpdate.setProject(powertool.getProject());
+		//toUpdate.setProject(powertool.getProject());
 		toUpdate.setWorkshop(powertool.getWorkshop());
 		return this.repo.save(toUpdate);
 	}

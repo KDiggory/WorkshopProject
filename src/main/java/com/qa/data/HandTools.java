@@ -2,15 +2,18 @@ package com.qa.data;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.qa.data.Projects;
 import com.qa.data.Tools;
 import com.qa.data.Workshop;
-
+@Entity
 public class HandTools implements Tools {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +27,14 @@ public class HandTools implements Tools {
 	
 	private String size;
 	
-	@ManyToMany 
+	@ManyToOne 
 	private Workshop workshop;
 	
-	@ManyToMany 
-	private Projects project;
+//	@OneToMany
+//	private Projects project;
 
-	public HandTools(Integer id, String name, String usedFor, String easy, String size, Workshop workshop,
-			Projects project) {
+	public HandTools(Integer id, String name, String usedFor, String easy, String size, Workshop workshop
+			) { // Projects project
 		super();
 		this.id = id;
 		this.name = name;
@@ -39,7 +42,7 @@ public class HandTools implements Tools {
 		this.easy = easy;
 		this.size = size;
 		this.workshop = workshop;
-		this.project = project;
+		//this.project = project; 
 	}
 
 	public HandTools() {
@@ -95,17 +98,9 @@ public class HandTools implements Tools {
 		this.workshop = workshop;
 	}
 
-	public Projects getProject() {
-		return project;
-	}
-
-	public void setProject(Projects project) {
-		this.project = project;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(easy, id, name, project, size, usedFor, workshop);
+		return Objects.hash(easy, id, name, size, usedFor, workshop);
 	}
 
 	@Override
@@ -118,10 +113,12 @@ public class HandTools implements Tools {
 			return false;
 		HandTools other = (HandTools) obj;
 		return Objects.equals(easy, other.easy) && Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(project, other.project) && Objects.equals(size, other.size)
-				&& Objects.equals(usedFor, other.usedFor) && Objects.equals(workshop, other.workshop);
+				&& Objects.equals(size, other.size) && Objects.equals(usedFor, other.usedFor)
+				&& Objects.equals(workshop, other.workshop);
 	}
+
+	
 	
 
-}
+} 
  

@@ -69,7 +69,7 @@ public class ProjectsController {
 		service.getAllProjects().forEach(n -> System.out.println(n)); 
 		return this.service.getAllProjects();
 		
-	}
+	} 
 	
 	@PostMapping("/createProject") 
 	public ResponseEntity<Projects> createProject(@RequestBody Projects project) {
@@ -94,7 +94,7 @@ public class ProjectsController {
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); 
 	}
 
-		
+		 
 } 
 
 }

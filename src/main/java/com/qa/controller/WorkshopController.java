@@ -33,7 +33,7 @@ public class WorkshopController {
 	}
 	
 	@GetMapping("/getAllWorkshops")  
-	public List<Workshop> getAllWorkshops() {
+	public List<Workshop> getAllWorkshops() { 
 		return this.service.getAllWorkshops();	
 	}
 	

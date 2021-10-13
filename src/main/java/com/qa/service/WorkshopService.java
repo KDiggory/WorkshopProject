@@ -9,8 +9,10 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.qa.data.PowerTools;
 import com.qa.data.Projects;
 import com.qa.data.Workshop;
+import com.qa.dto.PowerToolsDTO;
 import com.qa.dto.ProjectsDTO;
 import com.qa.dto.WorkshopDTO;
 import com.qa.exceptions.ProjectNotFoundException;
@@ -27,7 +29,7 @@ public class WorkshopService {
 	public WorkshopService(WorkshopRepo repo, ModelMapper mapper) {
 		super(); 
 		this.repo = repo;
-		this.mapper = mapper;
+		this.mapper = mapper; 
 	}
 	
 	private WorkshopDTO mapToDTO(Workshop workshop) {
@@ -44,7 +46,20 @@ public class WorkshopService {
 			pDTO.setProjectMaterials(p.getMaterials());
 			pDTO.setProjectName(p.getName());
 			pDTOs.add(pDTO);
+			
+		for (PowerTools pt : workshop.getPowertools()) {
+			PowerToolsDTO ptDTO = new PowerToolsDTO();
+			ptDTO.setCost(pt.getCost());
+			ptDTO.setDangerous(pt.getDangerous());
+			ptDTO.setEasy(pt.getEasy());
+			ptDTO.setName(pt.getName());
+			ptDTO.setUsedFor(pt.getUsedFor());
+			ptDTO.add(ptDTO);
+			
 		}
+		}
+		
+		
 		dto.setProjects(pDTOs);
 		return dto;
 		

@@ -2,12 +2,14 @@ package com.qa.data;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
+@Entity
 public class PowerTools implements Tools {
 
 	 
@@ -25,11 +27,11 @@ public class PowerTools implements Tools {
 	
 	private String dangerous;
 	
-	@ManyToMany 
+	@ManyToOne 
 	private Workshop workshop;
 	
-	@ManyToMany 
-	private Projects project;
+//	@OneToMany	
+//	private Projects project;
 
 	public PowerTools() {
 		super();
@@ -37,7 +39,7 @@ public class PowerTools implements Tools {
 	}
 
 	public PowerTools(Integer id, String name, String usedFor, String easy, Integer cost, String dangerous,
-			Workshop workshop, Projects project) {
+			Workshop workshop) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -46,8 +48,10 @@ public class PowerTools implements Tools {
 		this.cost = cost;
 		this.dangerous = dangerous;
 		this.workshop = workshop;
-		this.project = project;
+		//this.project = project;
 	}
+
+	
 
 	public Integer getId() {
 		return id;
@@ -105,17 +109,9 @@ public class PowerTools implements Tools {
 		this.workshop = workshop;
 	}
 
-	public Projects getProject() {
-		return project;
-	}
-
-	public void setProject(Projects project) {
-		this.project = project;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(cost, dangerous, easy, id, name, project, usedFor, workshop);
+		return Objects.hash(cost, dangerous, easy, id, name, usedFor, workshop);
 	}
 
 	@Override
@@ -129,10 +125,11 @@ public class PowerTools implements Tools {
 		PowerTools other = (PowerTools) obj;
 		return Objects.equals(cost, other.cost) && Objects.equals(dangerous, other.dangerous)
 				&& Objects.equals(easy, other.easy) && Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(project, other.project) && Objects.equals(usedFor, other.usedFor)
-				&& Objects.equals(workshop, other.workshop);
+				&& Objects.equals(usedFor, other.usedFor) && Objects.equals(workshop, other.workshop);
 	}
-	
-	
 
+	
+	 
+	
+ 
 }

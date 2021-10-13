@@ -40,7 +40,7 @@ public class ProjectsService {
 		dto.setEasy(project.getEasy());
 		dto.setId(project.getId());
 		dto.setWorkshop(project.getWorkshop());
-		return dto;
+		return dto; 
 	}
 
 	public ProjectWithWorkshopDTO getProjectById(Integer id) {

@@ -31,18 +31,22 @@ public class Workshop {
 	@JsonIgnore
 	@OneToMany(mappedBy = "workshop")
 	private List<Projects> project;
+	
+	@OneToMany(mappedBy = "workshop")
+	private List<PowerTools> powertools;
 
 	public Workshop() {
 		super();
 	
 	}
 
-	public Workshop(Integer id, String name, String address, List<Projects> project) {
+	public Workshop(Integer id, String name, String address, List<Projects> project, List<PowerTools> powertool) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.project = project;
+		this.powertools = powertool;
 	}
 
 	public Integer getId() {
@@ -73,13 +77,21 @@ public class Workshop {
 		return project;
 	}
 
+	public List<PowerTools> getPowertools() {
+		return powertools;
+	}
+
+	public void setPowertools(List<PowerTools> powertools) {
+		this.powertools = powertools;
+	}
+
 	public void setProject(List<Projects> project) {
 		this.project = project;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, id, name, project);
+		return Objects.hash(address, id, name, powertools, project);
 	}
 
 	@Override
@@ -92,7 +104,10 @@ public class Workshop {
 			return false;
 		Workshop other = (Workshop) obj;
 		return Objects.equals(address, other.address) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(project, other.project);
+				&& Objects.equals(name, other.name) && Objects.equals(powertools, other.powertools)
+				&& Objects.equals(project, other.project);
 	}
+
+	
 
 }
