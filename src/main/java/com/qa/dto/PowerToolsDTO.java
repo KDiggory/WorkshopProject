@@ -13,6 +13,7 @@ public class PowerToolsDTO {
 	private Integer cost;
 	
 	private String dangerous;
+	
 
 	public PowerToolsDTO(Integer id, String name, String usedFor, String easy, Integer cost, String dangerous) {
 		super();

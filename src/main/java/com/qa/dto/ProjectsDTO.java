@@ -20,7 +20,7 @@ public class ProjectsDTO {
 		this.easy = easy;
 		this.days = days;
 	}
-
+ 
 	public ProjectsDTO() {  
 		super();
 	}

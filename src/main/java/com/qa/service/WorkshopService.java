@@ -32,11 +32,12 @@ public class WorkshopService {
 		this.mapper = mapper; 
 	}
 	
-	private WorkshopDTO mapToDTO(Workshop workshop) {
+	WorkshopDTO mapToDTO(Workshop workshop) {
 		WorkshopDTO dto = new WorkshopDTO();
 		dto.setId(workshop.getId());
 		dto.setWSLocation(workshop.getAddress());
 		List<ProjectsDTO> pDTOs = new ArrayList<>();
+		List<PowerToolsDTO> ptDTOs = new ArrayList<>();
 		
 		for(Projects p : workshop.getProject()) {
 			ProjectsDTO pDTO = new ProjectsDTO();
@@ -47,6 +48,8 @@ public class WorkshopService {
 			pDTO.setProjectName(p.getName());
 			pDTOs.add(pDTO);
 			
+		for(PowerTools pt : workshop.getPowertools());
+			
 		for (PowerTools pt : workshop.getPowertools()) {
 			PowerToolsDTO ptDTO = new PowerToolsDTO();
 			ptDTO.setCost(pt.getCost());
@@ -54,21 +57,17 @@ public class WorkshopService {
 			ptDTO.setEasy(pt.getEasy());
 			ptDTO.setName(pt.getName());
 			ptDTO.setUsedFor(pt.getUsedFor());
-			ptDTO.add(ptDTO);
+			ptDTOs.add(ptDTO);
 			
 		}
 		}
 		
-		
+		dto.setPowerTools(ptDTOs);
 		dto.setProjects(pDTOs);
 		return dto;
 		
 	}
-	private WorkshopDTO mapToDTO2(Workshop workshop) {
-		return this.mapper.map(workshop,  WorkshopDTO.class);
-	}
 	
-
 	public WorkshopDTO getByIndex(Integer id) {
 		Workshop saved = this.repo.findById(id).orElseThrow(() -> {
 		      
@@ -79,12 +78,17 @@ public class WorkshopService {
 	
   
 
-	public List<Workshop> getAllWorkshops() {
-		return this.repo.findAll();
+	public List<WorkshopDTO> getAllWorkshops() { 
+		List<Workshop> saved = repo.findAll();
+		List<WorkshopDTO> send = new ArrayList<>();
+		for (Workshop workshop: saved) {
+			send.add(mapToDTO(workshop));
+		}
+		return send; 
 	}
 
 	public Workshop createWorkshop(Workshop workshop) {
-		return this.repo.save(workshop);  
+		return repo.save(workshop);
 	}
 
 	public boolean deleteWorkshop(Integer id) {
@@ -98,7 +102,9 @@ public class WorkshopService {
 		Workshop toUpdate = this.repo.findById(id).get();
 		toUpdate.setName(workshop.getName());
 		toUpdate.setAddress(workshop.getAddress());
-		return this.repo.save(toUpdate);
+		
+		return repo.save(toUpdate);
+		
 	}
 	public Object getWorkshop() {
 		return workshop;

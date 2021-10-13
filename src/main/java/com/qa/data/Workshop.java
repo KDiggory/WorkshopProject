@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.qa.dto.PowerToolsDTO;
 
 
 @Entity
@@ -32,6 +33,7 @@ public class Workshop {
 	@OneToMany(mappedBy = "workshop")
 	private List<Projects> project;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "workshop")
 	private List<PowerTools> powertools;
 

@@ -33,8 +33,8 @@ public class WorkshopController {
 	}
 	
 	@GetMapping("/getAllWorkshops")  
-	public List<Workshop> getAllWorkshops() { 
-		return this.service.getAllWorkshops();	
+	public List<WorkshopDTO> getAllWorkshops() { 
+		return this.service.getAllWorkshops();	 
 	}
 	
 	@PostMapping("/createWorkshop") 
