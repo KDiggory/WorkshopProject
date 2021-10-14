@@ -68,7 +68,7 @@ public class PowerToolsService {
 
 	PowerToolsDTO mapToDTO(PowerTools powertool) {
 		PowerToolsDTO dto = new PowerToolsDTO();
-		dto.setId(powertool.getId());
+		dto.setId(powertool.getId()); 
 		dto.setCost(powertool.getCost());
 		dto.setDangerous(powertool.getDangerous());
 		dto.setEasy(powertool.getEasy());
