@@ -19,18 +19,12 @@ public class PowerToolsDTO {
 	
 	private String dangerous;
 	
-	private List<ProjectsDTO> projects;
-	
 	private List<WorkshopDTO> workshops;
 	
-
-
 
 	public Integer getId() {
 		return id;
 	}
-
-
 
 
 	public void setId(Integer id) {
@@ -38,13 +32,9 @@ public class PowerToolsDTO {
 	}
 
 
-
-
 	public String getName() {
 		return name;
 	}
-
-
 
 
 	public void setName(String name) {
@@ -52,13 +42,9 @@ public class PowerToolsDTO {
 	}
 
 
-
-
 	public String getUsedFor() {
 		return usedFor;
 	}
-
-
 
 
 	public void setUsedFor(String usedFor) {
@@ -66,13 +52,9 @@ public class PowerToolsDTO {
 	}
 
 
-
-
 	public String getEasy() {
 		return easy;
 	}
-
-
 
 
 	public void setEasy(String easy) {
@@ -80,13 +62,9 @@ public class PowerToolsDTO {
 	}
 
 
-
-
 	public Integer getCost() {
 		return cost;
 	}
-
-
 
 
 	public void setCost(Integer cost) {
@@ -94,35 +72,14 @@ public class PowerToolsDTO {
 	}
 
 
-
-
 	public String getDangerous() {
 		return dangerous;
 	}
 
 
-
-
 	public void setDangerous(String dangerous) {
 		this.dangerous = dangerous;
 	}
-
-
-
-
-	public List<ProjectsDTO> getProjects() {
-		return projects;
-	}
-
-
-
-
-	public void setProjects(List<ProjectsDTO> list) {
-		this.projects = list;
-	}
-
-
-
 
 	public List<WorkshopDTO> getWorkshops() {
 		return workshops;
@@ -139,7 +96,7 @@ public class PowerToolsDTO {
 
 
 	public PowerToolsDTO(Integer id, String name, String usedFor, String easy, Integer cost, String dangerous,
-			List<ProjectsDTO> projects, List<WorkshopDTO> workshops) {
+			 List<WorkshopDTO> workshops) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -147,7 +104,6 @@ public class PowerToolsDTO {
 		this.easy = easy;
 		this.cost = cost;
 		this.dangerous = dangerous;
-		this.projects = projects;
 		this.workshops = workshops;
 	}
 
@@ -156,7 +112,7 @@ public class PowerToolsDTO {
 
 	public PowerToolsDTO() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 

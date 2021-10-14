@@ -1,4 +1,4 @@
-package com.qa.data;
+		package com.qa.data;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +22,6 @@ public class Projects {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	private Integer id;
 
 	private String name;
@@ -33,19 +32,16 @@ public class Projects {
 	
 	private Integer days;
 	
-	@ManyToOne //(fetch = FetchType.LAZY)
+	@ManyToOne 
 	@JoinColumn(name = "workshop_id")
 	private Workshop workshop;
 	
 	
-//	@ManyToOne (fetch = FetchType.LAZY)
-//	@JoinColumn(name = "powertool_id")
-//	private PowerTools powertool;
 
 	
 
 	public Projects(Integer id, String name, String materials, String easy, Integer days, Workshop workshop
-			) { //PowerTools powertool
+			) { 
 		super();
 		this.id = id;
 		this.name = name;
@@ -53,16 +49,9 @@ public class Projects {
 		this.easy = easy;
 		this.days = days;
 		this.workshop = workshop;
-		//this.powertool = powertool;
 	}
 
-//	public PowerTools getPowertool() {
-//		return powertool;
-//	}
-//
-//	public void setPowertool(PowerTools powertool) {
-//		this.powertool = powertool;
-//	}
+
 
 	public Projects() { 
 		super();

@@ -37,10 +37,10 @@ public class WorkshopTest {
 	@Test
 	void testMapToDTO() {
 		final List<ProjectsDTO> projectDTO = List.of(new ProjectsDTO(1, "Desk", "Walnut", "yes", 3));
-		final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null, null));
+		final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null));
 		
-		final List<PowerToolsDTO> powertoolsDTO = List.of(new PowerToolsDTO(1, "Drill", "Drilling","very", 115, "No", null, null));
-		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null));
+		final List<PowerToolsDTO> powertoolsDTO = List.of(new PowerToolsDTO(1, "Drill", "Drilling","very", 115, "No", null));
+		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null));
 		
 		final WorkshopDTO workshopDTO = new WorkshopDTO(1, "Katies Workshop", "The Garage" , projectDTO, powertoolsDTO);
 		final Workshop workshop = new Workshop(1, "Katies Workshop", "The Garage" , project, powertools);
@@ -53,8 +53,8 @@ public class WorkshopTest {
 	@Test
 	void testGetById() {
 		final Integer id = 1;
-		final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null, null));
-		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null));
+		final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null));
+		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null));
 		
 		final Workshop workshop = new Workshop(id, "Katies Workshop", "The Garage" , project, powertools);
 		WorkshopDTO toCheck = this.service.mapToDTO(workshop);
@@ -68,10 +68,10 @@ public class WorkshopTest {
 	
 	@Test
 	void testGetAllWorkshops() {
-		final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null, null), 
-				new Projects(2, "Door", "Pine", "yes", 2, null, null));
-		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null), 
-				new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null) );
+		final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null), 
+				new Projects(2, "Door", "Pine", "yes", 2, null));
+		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null), 
+				new PowerTools(1, "Drill", "Drilling","very", 115, "No",null) );
 		final List<Workshop> workshops = List.of(new Workshop(1, "Katies Workshop", "The Garage" , project, powertools),
 				new Workshop(2, "Katies other Workshop", "The kitchen table" , project, powertools));
 		List<WorkshopDTO> toCheck = new ArrayList<>();

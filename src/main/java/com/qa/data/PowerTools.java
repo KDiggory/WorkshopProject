@@ -19,7 +19,7 @@ import com.qa.dto.ProjectsDTO;
 import com.qa.dto.WorkshopDTO;
 
 @Entity
-public class PowerTools implements Tools {
+public class PowerTools {
 
 	 
 	@Id
@@ -40,13 +40,11 @@ public class PowerTools implements Tools {
 	@OneToMany(mappedBy = "id") 
 	private List<Workshop> workshop;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "id")
-	private List<Projects> project;
+	
 	
 
 	public PowerTools(Integer id, String name, String usedFor, String easy, Integer cost, String dangerous,
-			List<Workshop> workshop, List<Projects> project) {
+			List<Workshop> workshop) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -55,7 +53,7 @@ public class PowerTools implements Tools {
 		this.cost = cost;
 		this.dangerous = dangerous;
 		this.workshop = workshop;
-		this.project = project;
+		
 	}
 	public PowerTools() {
 		super();
@@ -117,12 +115,10 @@ public class PowerTools implements Tools {
 	public void setWorkshop(List<Workshop> workshop) {
 		this.workshop = workshop;
 	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(cost, dangerous, easy, id, name, usedFor, workshop);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -136,12 +132,11 @@ public class PowerTools implements Tools {
 				&& Objects.equals(easy, other.easy) && Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(usedFor, other.usedFor) && Objects.equals(workshop, other.workshop);
 	}
-	public List<Projects> getProject() {
-		return project;
-	}
-	public void setProject(List<Projects> project) {
-		this.project = project;
-	}
+
+	
+
+	
+	
 	 
 
 	

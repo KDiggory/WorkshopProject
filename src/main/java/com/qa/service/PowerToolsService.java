@@ -42,8 +42,6 @@ public class PowerToolsService {
 		toUpdate.setUsedFor(powertool.getUsedFor());
 		toUpdate.setCost(powertool.getCost());
 		toUpdate.setDangerous(powertool.getDangerous());
-		toUpdate.setId(powertool.getId());
-		//toUpdate.setProject(powertool.getProject());
 		toUpdate.setWorkshop(powertool.getWorkshop());
 		return this.repo.save(toUpdate);
 	}
@@ -76,22 +74,8 @@ public class PowerToolsService {
 		dto.setEasy(powertool.getEasy());
 		dto.setName(powertool.getName()); 
 		dto.setUsedFor(powertool.getUsedFor());
-		
-	
-		List<ProjectsDTO> pDTOs = new ArrayList<>();
 		List<WorkshopDTO> wDTOs = new ArrayList<>();
 		
-		
-		for(Projects p : powertool.getProject()) {
-			ProjectsDTO pDTO = new ProjectsDTO();
-			pDTO.setId(p.getId());
-			pDTO.setDays(p.getDays());
-			pDTO.setEasy(p.getEasy());
-			pDTO.setProjectMaterials(p.getMaterials());
-			pDTO.setProjectName(p.getName());
-			pDTOs.add(pDTO);
-		}
-			
 		for (Workshop ws : powertool.getWorkshop()) {
 			WorkshopDTO wsDTO = new WorkshopDTO();
 			wsDTO.setAddress(ws.getAddress());
@@ -99,9 +83,7 @@ public class PowerToolsService {
 			wsDTO.setId(ws.getId());
 			wDTOs.add(wsDTO);
 		
-		
 		}
-		dto.setProjects(pDTOs);
 		dto.setWorkshops(wDTOs);
 		return dto;
 		

@@ -28,6 +28,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qa.data.PowerTools;
 import com.qa.data.Workshop;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)

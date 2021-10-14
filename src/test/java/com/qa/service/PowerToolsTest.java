@@ -32,58 +32,45 @@ public class PowerToolsTest {
 	
 	@Autowired
 	private PowerToolsService service;
-	
-	
-//	@Test
-//	void testMapToDTO() {
-//	final List<ProjectsDTO> projectDTO = List.of(new ProjectsDTO(1, "Desk", "Walnut", "yes", 3));
-//	final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null));
-//	
-//	final List<PowerToolsDTO> powertoolsDTO = List.of(new PowerToolsDTO(1, "Drill", "Drilling","very", 115, "No"));
-//	final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null));
-//	
-//	final WorkshopDTO workshopDTO = new WorkshopDTO(1, "Katies Workshop", "The Garage" , projectDTO, powertoolsDTO);
-//	final Workshop workshop = new Workshop(1, "Katies Workshop", "The Garage" , project, powertools);
-//
-//	assertThat(this.service.mapToDTO(powertools)).isEqualTo(powertoolsDTO);
-//
-//}
 
 //	@Test
 //	void testGetById() {
 //		final Integer id = 1;
-//		//final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null));
-//		//final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null));
+//		final List<Workshop> workshop = new ArrayList();
 //		
-//		final PowerTools powertools = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
-//		PowerToolsDTO toCheck = this.service. .mapToDTO(powertools);
+//		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",workshop),
+//				new PowerTools(2, "Drill", "Drilling","very", 115, "No",workshop));
+//		List<PowerToolsDTO> toCheck = new ArrayList<>();
 //		
 //		Mockito.when(this.repo.findById(id)).thenReturn(Optional.of(powertools));
 //
-//		assertThat(this.service.getPowerToolById(id).isEqualTo(toCheck));
-//
+//		assertThat(this.service.getPowerToolById(id).equals(toCheck));
 //		Mockito.verify(this.repo, Mockito.times(1)).findById(id);
 //	}
-//	
-//	@Test
-//	void testGetAllPowertools() {
-//		final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null));
-//		//final List<PowerTools> powertool = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null));
-//		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null),
-//				new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null));
-//		List<PowerToolsDTO> toCheck = new ArrayList<>();
-//		for(PowerTools powertool :powertools) {
-//			toCheck.add(this.service.mapToDTO(powertool));
-//		}
-//	}
-		
+	
+	
+	@Test
+	void testGetAllPowertools() {
+		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null),
+				new PowerTools(2, "Drill", "Drilling","very", 115, "No",null));
+
+		Mockito.when(this.repo.findAll()).thenReturn(powertools);
+
+		assertThat(this.service.getAllPowerTools()).isEqualTo(powertools);
+
+		Mockito.verify(this.repo, Mockito.times(1)).findAll();
+	}
+	
+	
+	
+	
 		@Test
 		void testUpdatePowertool() { 
 			final Integer id = 1;
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			Optional<PowerTools> optionalpowertool = Optional.of(powertool);
 
-			PowerTools newpowertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools newpowertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 
 			Mockito.when(this.repo.findById(id)).thenReturn(optionalpowertool);
 			Mockito.when(this.repo.save(newpowertool)).thenReturn(newpowertool);
@@ -97,8 +84,8 @@ public class PowerToolsTest {
 		@Test
 		void testCreatePowerTool() {
 			final Integer id = 1;
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
-			PowerTools savedpowertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
+			PowerTools savedpowertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 
 			Mockito.when(this.repo.save(powertool)).thenReturn(savedpowertool);
 
@@ -120,113 +107,99 @@ public class PowerToolsTest {
 		
 		@Test
 		void testSetId()  {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			powertool.setId(2);
 			assertEquals(2, powertool.getId());
 		}
 		
 		@Test
 		void testGetId() {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			Integer expected = powertool.getId();
 			assertEquals(expected, 1);
 		}
 		
 		@Test
 		void testSetName()  {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			powertool.setName("Big drill");
 			assertEquals("Big drill", powertool.getName());
 		}
 		
 		@Test
 		void testGetName() {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			String expected = powertool.getName();
 			assertEquals(expected, "Drill");
 		}
 		
 		@Test
 		void testSetUsedFor()  {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			powertool.setUsedFor("Hard drilling");
 			assertEquals("Hard drilling", powertool.getUsedFor());
 		}
 		
 		@Test
 		void testGetUsedFor() {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			String expected = powertool.getUsedFor();
 			assertEquals(expected, "Drilling");
 		}
 		
 		@Test
 		void testSetEasy()  {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			powertool.setEasy("quite");
 			assertEquals("quite", powertool.getEasy());
 		}
 		
 		@Test
 		void testGetEasy() {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			String expected = powertool.getEasy();
 			assertEquals(expected, "very");
 		}
 		
 		@Test
 		void testSetCost()  {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			powertool.setCost(120);
 			assertEquals(120, powertool.getCost());
 		}
 		
 		@Test
 		void testGetCost() {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			Integer expected = powertool.getCost();
 			assertEquals(expected, 115);
 		}
 		
 		@Test
 		void testSetDangerous()  {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			powertool.setDangerous("Negligible");
 			assertEquals("Negligible", powertool.getDangerous());
 		}
 		
 		@Test
 		void testGetDangerous() {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			String expected = powertool.getDangerous();
 			assertEquals(expected, "No");
 		}
 		
 		@Test
 		void testSetWorkshop()  {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			powertool.setWorkshop(null);
 			assertEquals(null, powertool.getWorkshop());
 		}
 		
 		@Test
 		void testGetWorkshop() {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
+			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
 			List<Workshop> expected = powertool.getWorkshop();
-			assertEquals(expected, null);
-		}
-		
-		@Test
-		void testSetProjects()  {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
-			powertool.setProject(null);
-			assertEquals(null, powertool.getProject());
-		}
-		
-		@Test
-		void testGetProjects() {
-			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
-			List<Projects> expected = powertool.getProject();
 			assertEquals(expected, null);
 		}
 	
