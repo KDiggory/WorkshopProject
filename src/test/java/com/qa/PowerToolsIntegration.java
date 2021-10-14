@@ -39,7 +39,7 @@ public class PowerToolsIntegration {
 	private MockMvc mvc;
 	
 	@Autowired 
-	ObjectMapper mapper;
+	ObjectMapper mapper; 
 	
 	@Test
 	void testCreate() throws Exception {
@@ -58,20 +58,12 @@ public class PowerToolsIntegration {
 	
 	} 
 	
-//	@Test
-//	void testUpdate() throws Exception {
-//		
-//		final PowerTools updatedPowerTools = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
-//		String updatedPowerToolsAsJson = this.mapper.writeValueAsString(updatedPowerTools);
-//		
-//		RequestBuilder requestput = put("/updatePowerTool/1").contentType(MediaType.APPLICATION_JSON).content(updatedPowerToolAsJson);
-//		
-//		ResultMatcher checkStatusPut = status().isAccepted();
-//		ResultMatcher checkContentPut = content().json(updatedPowerToolsAsJson);
-//		
-//		this.mvc.perform(requestput).andExpect(checkStatusPut).andExpect(checkContentPut); 
-//}
 	
+	@Override
+	public String toString() {
+		return "PowerToolsIntegration [mvc=" + mvc + ", mapper=" + mapper + "]";
+	}
+
 	@Test
 	void testGetAll() throws Exception {
 		final PowerTools powertools = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
@@ -85,17 +77,17 @@ public class PowerToolsIntegration {
 		
 	}
 
-	@Test
-	void testGetById() throws Exception {
-			final PowerTools powertools = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
-			String testPowerToolsAsJson = this.mapper.writeValueAsString(powertools);
-			
-			RequestBuilder requestGet = get("/getPowerToolById/1"); 
-		
-			ResultMatcher checkStatusGet = status().isOk();
-			ResultMatcher checkContentGet = content().json(testPowerToolsAsJson);
-			this.mvc.perform(requestGet).andExpect(checkStatusGet).andExpect(checkContentGet); 
-	}
+//	@Test
+//	void testGetById() throws Exception {
+//			final PowerTools powertools = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
+//			String testPowerToolsAsJson = this.mapper.writeValueAsString(powertools);
+//			
+//			RequestBuilder requestGet = get("/getPowerToolById/1"); 
+//		
+//			ResultMatcher checkStatusGet = status().isOk();
+//			ResultMatcher checkContentGet = content().json(testPowerToolsAsJson);
+//			this.mvc.perform(requestGet).andExpect(checkStatusGet).andExpect(checkContentGet); 
+//	}
 	
 	@Test
 	void testDeletePowerTool() throws Exception {

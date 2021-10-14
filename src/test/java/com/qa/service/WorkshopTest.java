@@ -39,7 +39,7 @@ public class WorkshopTest {
 		final List<ProjectsDTO> projectDTO = List.of(new ProjectsDTO(1, "Desk", "Walnut", "yes", 3));
 		final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null));
 		
-		final List<PowerToolsDTO> powertoolsDTO = List.of(new PowerToolsDTO(1, "Drill", "Drilling","very", 115, "No", null));
+		final List<PowerToolsDTO> powertoolsDTO = List.of(new PowerToolsDTO(null, "Drill", "Drilling","very", 115, "No", null));
 		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null));
 		
 		final WorkshopDTO workshopDTO = new WorkshopDTO(1, "Katies Workshop", "The Garage" , projectDTO, powertoolsDTO);
@@ -53,10 +53,10 @@ public class WorkshopTest {
 	@Test
 	void testGetById() {
 		final Integer id = 1;
-		final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null));
-		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null));
+		final List<Projects> project = List.of(new Projects(1, "Bookcase", "Oak", "yes", 4, null));
+		final List<PowerTools> powertools = List.of(new PowerTools(1, "drill", "drilling","very", 115, "No",null));
 		
-		final Workshop workshop = new Workshop(id, "Katies Workshop", "The Garage" , project, powertools);
+		final Workshop workshop = new Workshop(1, "Katies Workshop", "The Garage" , project, powertools);
 		WorkshopDTO toCheck = this.service.mapToDTO(workshop);
 		
 		Mockito.when(this.repo.findById(id)).thenReturn(Optional.of(workshop));
@@ -68,12 +68,9 @@ public class WorkshopTest {
 	
 	@Test
 	void testGetAllWorkshops() {
-		final List<Projects> project = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null), 
-				new Projects(2, "Door", "Pine", "yes", 2, null));
-		final List<PowerTools> powertools = List.of(new PowerTools(1, "Drill", "Drilling","very", 115, "No",null), 
-				new PowerTools(1, "Drill", "Drilling","very", 115, "No",null) );
-		final List<Workshop> workshops = List.of(new Workshop(1, "Katies Workshop", "The Garage" , project, powertools),
-				new Workshop(2, "Katies other Workshop", "The kitchen table" , project, powertools));
+		final List<Projects> project = List.of(new Projects(1, "Bookcase", "Oak", "yes", 4, null));
+		final List<PowerTools> powertools = List.of(new PowerTools(1, "drill", "drilling","very", 115, "No",null));
+		final List<Workshop> workshops = List.of(new Workshop(1, "Katies Workshop", "The Garage" , project, powertools));
 		List<WorkshopDTO> toCheck = new ArrayList<>();
 		for(Workshop workshop :workshops) {
 			toCheck.add(this.service.mapToDTO(workshop));
@@ -177,19 +174,6 @@ public class WorkshopTest {
 	    assertThat(workshop1.hashCode() == workshop2.hashCode());
 	}
 	
-//	@Test
-//	void testSetWorkshop() {
-//		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
-//		initialWorkshop.setWorkshop(null); 
-//		assertEquals(null, initialWorkshop.getWorkshop());
-//	}
-//	
-//	@Test
-//	void testGetWorkshop() {
-//		final Workshop initialWorkshop = new Workshop(1, "Katies Workshop", "The Garage" , null);
-//		List<Workshop> expected = initialWorkshop.getWorkshop();
-//		assertEquals(expected, null);
-//	}
 }
 
 

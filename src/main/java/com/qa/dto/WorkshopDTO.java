@@ -1,6 +1,7 @@
 package com.qa.dto;
 
 import java.util.List;
+import java.util.Objects;
 
 public class WorkshopDTO {
 
@@ -18,6 +19,31 @@ public class WorkshopDTO {
 	
 
 	
+
+	@Override
+	public String toString() {
+		return "WorkshopDTO [id=" + id + ", name=" + name + ", address=" + address + ", projects=" + projects
+				+ ", powertools=" + powertools + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(address, id, name, powertools, projects);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		WorkshopDTO other = (WorkshopDTO) obj;
+		return Objects.equals(address, other.address) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name) && Objects.equals(powertools, other.powertools)
+				&& Objects.equals(projects, other.projects);
+	}
 
 	public WorkshopDTO(Integer id, String name, String address, List<ProjectsDTO> projects,
 			List<PowerToolsDTO> powertools) {

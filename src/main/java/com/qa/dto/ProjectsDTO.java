@@ -1,5 +1,7 @@
 package com.qa.dto;
 
+import java.util.Objects;
+
 public class ProjectsDTO {
 
 	private Integer id;
@@ -21,6 +23,31 @@ public class ProjectsDTO {
 		this.days = days;
 	}
  
+	@Override
+	public int hashCode() {
+		return Objects.hash(days, easy, id, projectMaterials, projectName);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProjectsDTO other = (ProjectsDTO) obj;
+		return Objects.equals(days, other.days) && Objects.equals(easy, other.easy) && Objects.equals(id, other.id)
+				&& Objects.equals(projectMaterials, other.projectMaterials)
+				&& Objects.equals(projectName, other.projectName);
+	}
+
+	@Override
+	public String toString() {
+		return "ProjectsDTO [id=" + id + ", projectName=" + projectName + ", projectMaterials=" + projectMaterials
+				+ ", easy=" + easy + ", days=" + days + "]";
+	}
+
 	public ProjectsDTO() {  
 		super();
 	}
