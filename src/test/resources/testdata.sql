@@ -7,3 +7,8 @@ insert into workshop
 	(name, materials, easy, days) 
 		values
 	('Bookcase', 'Oak', 'yes', '4');
+	
+	insert into powertools
+	(name, usedFor, easy, cost, dangerous)
+		values
+	('drill', 'drilling','very', 115, 'no');

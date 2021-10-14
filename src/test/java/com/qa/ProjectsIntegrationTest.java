@@ -70,7 +70,7 @@ public class ProjectsIntegrationTest {
 		ResultMatcher checkContentPut = content().json(updatedProjectAsJson);
 		
 		this.mvc.perform(requestput).andExpect(checkStatusPut).andExpect(checkContentPut); 
-}
+} 
 	@Test
 	void testGetAll() throws Exception {
 		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null);

@@ -6,11 +6,13 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.qa.data.Projects;
-
+import com.qa.dto.ProjectWithWorkshopDTO;
+import com.qa.dto.ProjectsDTO;
 //import com.qa.dto.ProjectWithWorkshopDTO;
 import com.qa.exceptions.ProjectNotFoundException;
 import com.qa.repo.ProjectsRepo;
@@ -21,21 +23,36 @@ public class ProjectsService {
 	 	
 	public ProjectsRepo repo;
 	
-	public ProjectsService(ProjectsRepo repo) {
+	private ModelMapper mapper;
+	
+	public ProjectsService(ProjectsRepo repo,  ModelMapper mapper) {
 		super();
 		this.repo = repo;
+		this.mapper = mapper;
+	}
+	
+	private ProjectWithWorkshopDTO mapToDTO(Projects project) {
+		ProjectWithWorkshopDTO dto = new ProjectWithWorkshopDTO();
+
+		dto.setProjectMaterials(project.getMaterials());
+		dto.setProjectName(project.getName()); 
+		dto.setDays(project.getDays());
+		dto.setEasy(project.getEasy());
+		dto.setId(project.getId());
+		dto.setWorkshop(project.getWorkshop());
+		return dto; 
 	}
 
-	public Projects getProjectById(Integer id) {
+	public ProjectWithWorkshopDTO getProjectById(Integer id) {
 		Projects saved = this.repo.findById(id).orElseThrow(() -> {
 		      
 		       return new ProjectNotFoundException("No project found with that id");
 		});
-		return saved;
+		return this.mapToDTO(saved);
 		}	
 	
 	public List<Projects> findByName(String name) {
-		var projects = (List<Projects>) repo.findByName(name);
+		var projects = (List<Projects>) repo.findByName(name); 
 		return projects;
 	}
 	
@@ -54,7 +71,7 @@ public class ProjectsService {
 		return this.repo.findAll();
 	}
 
-	public Projects createProject(com.qa.data.Projects project) {
+	public Projects createProject(Projects project) {
 		return this.repo.save(project);
 	}
 

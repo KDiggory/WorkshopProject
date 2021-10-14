@@ -1,13 +1,19 @@
-package com.qa.data;
+		package com.qa.data;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -16,21 +22,26 @@ public class Projects {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	private Integer id;
 
 	private String name;
 	
 	private String materials;
 	
-	private String easy;
+	private String easy; 
 	
 	private Integer days;
 	
 	@ManyToOne 
+	@JoinColumn(name = "workshop_id")
 	private Workshop workshop;
+	
+	
 
-	public Projects(Integer id, String name, String materials, String easy, Integer days, Workshop workshop) {
+	
+
+	public Projects(Integer id, String name, String materials, String easy, Integer days, Workshop workshop
+			) { 
 		super();
 		this.id = id;
 		this.name = name;
@@ -39,6 +50,8 @@ public class Projects {
 		this.days = days;
 		this.workshop = workshop;
 	}
+
+
 
 	public Projects() { 
 		super();
@@ -113,6 +126,6 @@ public class Projects {
 	}
 	
 
-	
-	
+	 
+	 
 }

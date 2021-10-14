@@ -1,9 +1,5 @@
 package com.qa;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -12,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,93 +19,92 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
-
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.data.PowerTools;
-import com.qa.data.Workshop;
+import com.qa.data.Projects;
+
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Sql(scripts = { "classpath:testschema.sql",
 "classpath:testdata.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-public class WorkshopIntegrationTest {
-	
+
+public class PowerToolsIntegration {
 	
 	@Autowired
 	private MockMvc mvc;
-	 
+	
 	@Autowired 
 	ObjectMapper mapper;
 	
 	@Test
 	void testCreate() throws Exception {
-		final Workshop workshop = new Workshop(2, "Katies Workshop", "The garage", null, null);
-		String testWorkshopAsJson = this.mapper.writeValueAsString(workshop);
+		final PowerTools powertools = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
+		String testPowerToolsAsJson = this.mapper.writeValueAsString(powertools);
 		
-		final Workshop savedWorkshop = new Workshop(2, "Katies Workshop", "The garage", null, null);
-		String savedWorkshopAsJson = this.mapper.writeValueAsString(savedWorkshop);
+		final PowerTools savedPowerTools = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
+		String savedPowerToolsAsJson = this.mapper.writeValueAsString(savedPowerTools); 
 		
-		RequestBuilder request = post("/createWorkshop").contentType(MediaType.APPLICATION_JSON).content(testWorkshopAsJson);
+		RequestBuilder request = post("/createPowerTool").contentType(MediaType.APPLICATION_JSON).content(testPowerToolsAsJson);
 		
 		ResultMatcher checkStatus = status().isCreated();
-		ResultMatcher checkContent = content().json(savedWorkshopAsJson);
+		ResultMatcher checkContent = content().json(savedPowerToolsAsJson);
 		
 		this.mvc.perform(request).andExpect(checkStatus).andExpect(checkContent); 
-
-}
 	
-	@Test
-	void testUpdateWorkshop() throws Exception {
-		final Workshop workshop = new Workshop(1, "Katies other Workshop", "the kitchen table", null, null);
-		final String testWorkshopAsJson = this.mapper.writeValueAsString(workshop);
-		
-		RequestBuilder requestput = put("/updateWorkshop/1").contentType(MediaType.APPLICATION_JSON).content(testWorkshopAsJson);
-		
-		ResultMatcher checkStatusPut = status().isAccepted();
-		ResultMatcher checkContentPut = content().json(testWorkshopAsJson);
-		
-		this.mvc.perform(requestput).andExpect(checkStatusPut).andExpect(checkContentPut);
-	}
+	} 
 	
+//	@Test
+//	void testUpdate() throws Exception {
+//		
+//		final PowerTools updatedPowerTools = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
+//		String updatedPowerToolsAsJson = this.mapper.writeValueAsString(updatedPowerTools);
+//		
+//		RequestBuilder requestput = put("/updatePowerTool/1").contentType(MediaType.APPLICATION_JSON).content(updatedPowerToolAsJson);
+//		
+//		ResultMatcher checkStatusPut = status().isAccepted();
+//		ResultMatcher checkContentPut = content().json(updatedPowerToolsAsJson);
+//		
+//		this.mvc.perform(requestput).andExpect(checkStatusPut).andExpect(checkContentPut); 
+//}
 	
 	@Test
 	void testGetAll() throws Exception {
+		final PowerTools powertools = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
+		String testPowerToolsAsJson = this.mapper.writeValueAsString(List.of(powertools));
 		
-		final Workshop workshop = new Workshop(null, "Katies Workshop", "The Garage", null, null);
-		String testWorkshopAsJson = this.mapper.writeValueAsString(List.of(workshop)); 
-		
-		RequestBuilder requestGet = get("/getAllWorkshops");
-		
+		RequestBuilder requestGet = get("/getAllPowerTools"); 
+	
 		ResultMatcher checkStatusGet = status().isOk();
-		ResultMatcher checkContentGet = content().json(testWorkshopAsJson);
+		ResultMatcher checkContentGet = content().json(testPowerToolsAsJson);
 		this.mvc.perform(requestGet).andExpect(checkStatusGet).andExpect(checkContentGet); 
+		
 	}
-	
-	
+
 	@Test
 	void testGetById() throws Exception {
-		final Workshop workshop = new Workshop(null, "Katies Workshop", "The Garage", null, null);
-		String testWorkshopAsJson = this.mapper.writeValueAsString(workshop);
+			final PowerTools powertools = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null);
+			String testPowerToolsAsJson = this.mapper.writeValueAsString(powertools);
+			
+			RequestBuilder requestGet = get("/getPowerToolById/1"); 
 		
-		RequestBuilder requestGet = get("/getWorkshopById/" + workshop.getId() );
-	
-		ResultMatcher checkStatusGet = status().isOk();
-		ResultMatcher checkContentGet = content().json(testWorkshopAsJson);
-		this.mvc.perform(requestGet).andExpect(checkStatusGet).andExpect(checkContentGet); 
+			ResultMatcher checkStatusGet = status().isOk();
+			ResultMatcher checkContentGet = content().json(testPowerToolsAsJson);
+			this.mvc.perform(requestGet).andExpect(checkStatusGet).andExpect(checkContentGet); 
 	}
-	 
 	
 	@Test
-	void testRemoveWorkshop() throws Exception {
-		RequestBuilder requestDel = delete("/removeWorkshop/1");
+	void testDeletePowerTool() throws Exception {
+		
+		RequestBuilder requestDel = delete("/deletePowerTool/1").contentType(MediaType.APPLICATION_JSON);
 		
 		ResultMatcher checkStatusGet = status().isNoContent();
 		
 		this.mvc.perform(requestDel).andExpect(checkStatusGet);
 	}
+
 }

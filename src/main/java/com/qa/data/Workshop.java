@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.qa.dto.PowerToolsDTO;
 
 
 @Entity
@@ -31,18 +32,23 @@ public class Workshop {
 	@JsonIgnore
 	@OneToMany(mappedBy = "workshop")
 	private List<Projects> project;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "workshop")
+	private List<PowerTools> powertools;
 
 	public Workshop() {
 		super();
 	
 	}
 
-	public Workshop(Integer id, String name, String address, List<Projects> project) {
+	public Workshop(Integer id, String name, String address, List<Projects> project, List<PowerTools> powertool) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
-		this.project = project;
+		this.project = project; 
+		this.powertools = powertool;
 	}
 
 	public Integer getId() {
@@ -65,12 +71,20 @@ public class Workshop {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(String address) { 
 		this.address = address;
 	}
  
 	public List<Projects> getProject() {
 		return project;
+	}
+
+	public List<PowerTools> getPowertools() {
+		return powertools;
+	}
+
+	public void setPowertools(List<PowerTools> powertools) {
+		this.powertools = powertools;
 	}
 
 	public void setProject(List<Projects> project) {
@@ -79,7 +93,7 @@ public class Workshop {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, id, name, project);
+		return Objects.hash(address, id, name, powertools, project);
 	}
 
 	@Override
@@ -92,7 +106,10 @@ public class Workshop {
 			return false;
 		Workshop other = (Workshop) obj;
 		return Objects.equals(address, other.address) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(project, other.project);
+				&& Objects.equals(name, other.name) && Objects.equals(powertools, other.powertools)
+				&& Objects.equals(project, other.project);
 	}
+
+	
 
 }

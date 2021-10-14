@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.data.Workshop;
+import com.qa.dto.WorkshopDTO;
 import com.qa.service.WorkshopService;
 
 @RestController
@@ -27,13 +28,13 @@ public class WorkshopController {
 	}
 	
 	@GetMapping("/getWorkshopById/{id}") 
-	public Workshop getByIndex(@PathVariable Integer id) {
+	public WorkshopDTO getByIndex(@PathVariable Integer id) {
 		return this.service.getByIndex(id);	
 	}
 	
-	@GetMapping("/getAllWorkshops") 
-	public List<Workshop> getAllWorkshops() {
-		return this.service.getAllWorkshops();	
+	@GetMapping("/getAllWorkshops")  
+	public List<WorkshopDTO> getAllWorkshops() { 
+		return this.service.getAllWorkshops();	 
 	}
 	
 	@PostMapping("/createWorkshop") 
