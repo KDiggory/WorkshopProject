@@ -42,10 +42,10 @@ public class ProjectsIntegrationTest {
 	
 	@Test
 	void testCreate() throws Exception {
-		final Projects project = new Projects(2, "Desk", "Walnut", "Yes", 3, null);
+		final Projects project = new Projects(2, "Desk", "Walnut", "Yes", 3, null, null);
 		String testProjectAsJson = this.mapper.writeValueAsString(project);
 		
-		final Projects savedProject = new Projects(2, "Desk", "Walnut", "Yes", 3, null);
+		final Projects savedProject = new Projects(2, "Desk", "Walnut", "Yes", 3, null, null);
 		String savedProjectAsJson = this.mapper.writeValueAsString(savedProject); 
 		
 		RequestBuilder request = post("/createProject").contentType(MediaType.APPLICATION_JSON).content(testProjectAsJson);
@@ -60,7 +60,7 @@ public class ProjectsIntegrationTest {
 	@Test
 	void testUpdate() throws Exception {
 		
-		final Projects updatedProject = new Projects(1, "Desk", "Oak", "Yes", 2, null);
+		final Projects updatedProject = new Projects(1, "Desk", "Oak", "Yes", 2, null, null);
 		String updatedProjectAsJson = this.mapper.writeValueAsString(updatedProject);
 		
 		
@@ -73,7 +73,7 @@ public class ProjectsIntegrationTest {
 }
 	@Test
 	void testGetAll() throws Exception {
-		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null);
+		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null, null);
 		String testProjectAsJson = this.mapper.writeValueAsString(List.of(project));
 		
 		RequestBuilder requestGet = get("/getAllProjects"); 
@@ -86,7 +86,7 @@ public class ProjectsIntegrationTest {
 	
 	@Test
 	void testGetById() throws Exception {
-		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null);
+		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null, null);
 		String testProjectAsJson = this.mapper.writeValueAsString(project);
 		
 		RequestBuilder requestGet = get("/getProjectById/1");
@@ -98,7 +98,7 @@ public class ProjectsIntegrationTest {
 	
 	@Test
 	void testGetByName() throws Exception {
-		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null);
+		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null, null);
 		String testProjectAsJson = this.mapper.writeValueAsString(List.of(project));
 		
 		RequestBuilder requestGet = get("/getProjectByName/Bookcase");
@@ -110,7 +110,7 @@ public class ProjectsIntegrationTest {
 	
 	@Test
 	void testGetByWorkshop() throws Exception {
-		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null);
+		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null, null);
 		String testProjectAsJson = this.mapper.writeValueAsString(List.of(project));
 		
 		RequestBuilder requestGet = get("/getProjectByWorkshop/1");
@@ -122,7 +122,7 @@ public class ProjectsIntegrationTest {
 	
 	@Test
 	void testGetByDays() throws Exception {
-		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null);
+		final Projects project = new Projects(1, "Bookcase", "Oak", "yes", 4, null, null);
 		String testProjectAsJson = this.mapper.writeValueAsString(List.of(project));
 		
 		RequestBuilder requestGet = get("/getProjectByDays/4");

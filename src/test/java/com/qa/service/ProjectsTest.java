@@ -37,7 +37,7 @@ public class ProjectsTest {
 	void testGetById() {
 		final Integer id = 1;
 
-		final Projects project = new Projects(id, "Desk", "Walnut", "yes", 3, null);
+		final Projects project = new Projects(id, "Desk", "Walnut", "yes", 3, null, null);
 		
 		
 		Mockito.when(this.repo.findById(id)).thenReturn(Optional.of(project));
@@ -50,8 +50,8 @@ public class ProjectsTest {
 	@Test
 	void testGetByName() {
 		final String name = "Desk";
-		final List<Projects> projects = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null),
-				new Projects(2, "Desk", "Pine", "yes", 2, null));
+		final List<Projects> projects = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null, null),
+				new Projects(2, "Desk", "Pine", "yes", 2, null, null));
 		
 		
 		Mockito.when(this.repo.findByName(name)).thenReturn(projects);
@@ -64,8 +64,8 @@ public class ProjectsTest {
 	@Test
 	void testGetByDays() {
 		final Integer days = 2;
-		final List<Projects> projects = List.of(new Projects(1, "Desk", "Walnut", "yes", 2, null),
-				new Projects(2, "Desk", "Pine", "yes", 2, null));
+		final List<Projects> projects = List.of(new Projects(1, "Desk", "Walnut", "yes", 2, null, null),
+				new Projects(2, "Desk", "Pine", "yes", 2, null, null));
 		
 		
 		Mockito.when(this.repo.findByDays(days)).thenReturn(projects);
@@ -78,8 +78,8 @@ public class ProjectsTest {
 	@Test
 	void testGetByWorkshop() {
 		final Integer id = null;
-		final List<Projects> projects = List.of(new Projects(1, "Desk", "Walnut", "yes", 2, null),
-				new Projects(2, "Desk", "Pine", "yes", 2, null));
+		final List<Projects> projects = List.of(new Projects(1, "Desk", "Walnut", "yes", 2, null, null),
+				new Projects(2, "Desk", "Pine", "yes", 2, null, null));
 		
 		
 		Mockito.when(this.repo.findByWorkshop(id)).thenReturn(projects);
@@ -91,8 +91,8 @@ public class ProjectsTest {
 	
 	@Test
 	void testGetAllProjects() {
-		final List<Projects> projects = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null),
-				new Projects(2, "Door", "Pine", "yes", 2, null));
+		final List<Projects> projects = List.of(new Projects(1, "Desk", "Walnut", "yes", 3, null, null),
+				new Projects(2, "Door", "Pine", "yes", 2, null, null));
 
 		Mockito.when(this.repo.findAll()).thenReturn(projects);
 
@@ -104,10 +104,10 @@ public class ProjectsTest {
 	@Test
 	void testUpdateProject() { 
 		final Integer id = 1;
-		Projects project = new Projects(id, "Desk", "Walnut", "yes", 3, null);
+		Projects project = new Projects(id, "Desk", "Walnut", "yes", 3, null, null);
 		Optional<Projects> optionalProject = Optional.of(project);
 
-		Projects newProject = new Projects(id, "Desk", "Walnut", "yes", 3, null);
+		Projects newProject = new Projects(id, "Desk", "Walnut", "yes", 3, null, null);
 
 		Mockito.when(this.repo.findById(id)).thenReturn(optionalProject);
 		Mockito.when(this.repo.save(newProject)).thenReturn(newProject);
@@ -120,8 +120,8 @@ public class ProjectsTest {
 	@Test
 	void testCreateProject() {
 		final Integer id = 1;
-		Projects project = new Projects(id, "Desk", "Walnut", "yes", 3, null);
-		Projects savedProject = new Projects(1, "Door", "Pine", "yes", 2, null);
+		Projects project = new Projects(id, "Desk", "Walnut", "yes", 3, null, null);
+		Projects savedProject = new Projects(1, "Door", "Pine", "yes", 2, null, null);
 
 		Mockito.when(this.repo.save(project)).thenReturn(savedProject);
 
@@ -143,78 +143,78 @@ public class ProjectsTest {
 	
 	@Test
 	void testSetId() {
-		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
+		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);
 		initialProject.setId(2);
 		assertEquals(2, initialProject.getId());
 	}
 	
 	@Test
 	void testGetId() {
-		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
+		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);
 		Integer expected = initialProject.getId();
 		assertEquals(expected, 1);
 	}
 	
 	@Test
 	void testSetName() {
-		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
+		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);
 		initialProject.setName("Bookcase");
 		assertEquals("Bookcase", initialProject.getName());
 	}
 	
 	@Test
 	void testGetName() {
-		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
+		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);
 		String expected = initialProject.getName();
 		assertEquals(expected, "Desk");
 	}
 	
 	@Test
 	void testSetMaterials() {
-		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
+		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);
 		initialProject.setMaterials("Oak");
 		assertEquals("Oak", initialProject.getMaterials());
 	}
 	
 	@Test
 	void testGetMaterialse() {
-		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
+		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);
 		String expected = initialProject.getMaterials();
 		assertEquals(expected, "Walnut");
 	}
 	
 	@Test
 	void testSetEasy() {
-		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
+		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);
 		initialProject.setEasy("No");
 		assertEquals("No", initialProject.getEasy());
 	}
 	
 	@Test
 	void testGetEasy() {
-		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
+		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);
 		String expected = initialProject.getEasy();
 		assertEquals(expected, "yes");
 	}
 	
 	@Test
 	void testSetDays() {
-		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
+		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);
 		initialProject.setDays(4);
 		assertEquals(4, initialProject.getDays());
 	}
 	
 	@Test
 	void testGetDays() {
-		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null);
+		final Projects initialProject = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);
 		Integer expected = initialProject.getDays();
 		assertEquals(expected, 3);
 	}
 	
 	@Test
 	public void testEquals_Symmetric() {
-		Projects project1 = new Projects(1, "Desk", "Walnut", "yes", 3, null);  // equals and hashCode check name field value
-		Projects project2 = new Projects(1, "Desk", "Walnut", "yes", 3, null);
+		Projects project1 = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);  // equals and hashCode check name field value
+		Projects project2 = new Projects(1, "Desk", "Walnut", "yes", 3, null, null);
 	    assertThat(project1.equals(project2) && project2.equals(project1));
 	    assertThat(project1.hashCode() == project2.hashCode());
 	}
