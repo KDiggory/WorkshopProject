@@ -1,8 +1,10 @@
 package com.qa.service;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.IntPredicate;
+
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -13,7 +15,8 @@ import com.qa.data.Workshop;
 import com.qa.dto.PowerToolsDTO;
 import com.qa.dto.ProjectsDTO;
 import com.qa.dto.WorkshopDTO;
-import com.qa.exceptions.ProjectNotFoundException;
+import com.qa.exceptions.PowerToolNotFoundException;
+
 import com.qa.repo.PowerToolsRepo;
 @Service
 public class PowerToolsService {
@@ -58,48 +61,52 @@ public class PowerToolsService {
 	public PowerTools getPowerToolById(Integer id) {
 		PowerTools saved = this.repo.findById(id).orElseThrow(() -> {
 		      
-		       return new ProjectNotFoundException("No powertool found with that id");
+		       return new PowerToolNotFoundException("No powertool found with that id");
 		});
 		return saved;
 	}
 	
-	// change to powertools
 
-//	WorkshopDTO mapToDTO(Workshop workshop) {
-//		WorkshopDTO dto = new WorkshopDTO();
-//		dto.setId(workshop.getId());
-//		dto.setWSLocation(workshop.getAddress());
-//		List<ProjectsDTO> pDTOs = new ArrayList<>();
-//		List<PowerToolsDTO> ptDTOs = new ArrayList<>();
-//		
-//		for(Projects p : workshop.getProject()) {
-//			ProjectsDTO pDTO = new ProjectsDTO();
-//			pDTO.setId(p.getId());
-//			pDTO.setDays(p.getDays());
-//			pDTO.setEasy(p.getEasy());
-//			pDTO.setProjectMaterials(p.getMaterials());
-//			pDTO.setProjectName(p.getName());
-//			pDTOs.add(pDTO);
-//			
-//		for(PowerTools pt : workshop.getPowertools());
-//			
-//		for (PowerTools pt : workshop.getPowertools()) {
-//			PowerToolsDTO ptDTO = new PowerToolsDTO();
-//			ptDTO.setCost(pt.getCost());
-//			ptDTO.setDangerous(pt.getDangerous());
-//			ptDTO.setEasy(pt.getEasy());
-//			ptDTO.setName(pt.getName());
-//			ptDTO.setUsedFor(pt.getUsedFor());
-//			ptDTOs.add(ptDTO);
-//			
-//		}
-//		}
-//		
-//		dto.setPowerTools(ptDTOs);
-//		dto.setProjects(pDTOs);
-//		return dto;
-//		
-//	}
+
+	PowerToolsDTO mapToDTO(PowerTools powertool) {
+		PowerToolsDTO dto = new PowerToolsDTO();
+		dto.setId(powertool.getId());
+		dto.setCost(powertool.getCost());
+		dto.setDangerous(powertool.getDangerous());
+		dto.setEasy(powertool.getEasy());
+		dto.setName(powertool.getName()); 
+		dto.setUsedFor(powertool.getUsedFor());
+		
+	
+		List<ProjectsDTO> pDTOs = new ArrayList<>();
+		List<WorkshopDTO> wDTOs = new ArrayList<>();
+		
+		
+		for(Projects p : powertool.getProject()) {
+			ProjectsDTO pDTO = new ProjectsDTO();
+			pDTO.setId(p.getId());
+			pDTO.setDays(p.getDays());
+			pDTO.setEasy(p.getEasy());
+			pDTO.setProjectMaterials(p.getMaterials());
+			pDTO.setProjectName(p.getName());
+			pDTOs.add(pDTO);
+		}
+			
+		for (Workshop ws : powertool.getWorkshop()) {
+			WorkshopDTO wsDTO = new WorkshopDTO();
+			wsDTO.setAddress(ws.getAddress());
+			wsDTO.setName(ws.getName());
+			wsDTO.setId(ws.getId());
+			wDTOs.add(wsDTO);
+		
+		
+		}
+		dto.setProjects(pDTOs);
+		dto.setWorkshops(wDTOs);
+		return dto;
+		
+		
+	}
 	
 	
 	

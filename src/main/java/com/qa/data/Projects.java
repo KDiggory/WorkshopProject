@@ -1,13 +1,19 @@
 package com.qa.data;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -23,14 +29,23 @@ public class Projects {
 	
 	private String materials;
 	
-	private String easy;
+	private String easy; 
 	
 	private Integer days;
 	
-	@ManyToOne 
+	@ManyToOne (fetch = FetchType.LAZY)
+	@JoinColumn(name = "workshop_id")
 	private Workshop workshop;
+	
+	
+	@ManyToOne (fetch = FetchType.LAZY)
+	@JoinColumn(name = "powertool_id")
+	private PowerTools powertool;
 
-	public Projects(Integer id, String name, String materials, String easy, Integer days, Workshop workshop) {
+	
+
+	public Projects(Integer id, String name, String materials, String easy, Integer days, Workshop workshop,
+			List<PowerTools> powertool) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -38,6 +53,15 @@ public class Projects {
 		this.easy = easy;
 		this.days = days;
 		this.workshop = workshop;
+		this.powertool = powertool;
+	}
+
+	public List<PowerTools> getPowertool() {
+		return powertool;
+	}
+
+	public void setPowertool(List<PowerTools> powertool) {
+		this.powertool = powertool;
 	}
 
 	public Projects() { 

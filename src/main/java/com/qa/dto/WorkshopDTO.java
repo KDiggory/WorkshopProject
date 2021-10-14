@@ -6,24 +6,25 @@ public class WorkshopDTO {
 
 	private Integer id;
 	
-	private String workshopName;
+	private String name;
 
-	private String workshopLocation;
+	private String address;
 
 	private List<ProjectsDTO> projects;
 	
 	private List<PowerToolsDTO> powertools;
 
-	
 
 	
 
-	public WorkshopDTO(Integer id, String workshopName, String workshopLocation, List<ProjectsDTO> projects,
+	
+
+	public WorkshopDTO(Integer id, String name, String address, List<ProjectsDTO> projects,
 			List<PowerToolsDTO> powertools) {
 		super();
 		this.id = id;
-		this.workshopName = workshopName;
-		this.workshopLocation = workshopLocation;
+		this.name = name;
+		this.address = address;
 		this.projects = projects;
 		this.powertools = powertools;
 	}
@@ -40,20 +41,20 @@ public class WorkshopDTO {
 		this.id = id;
 	}
 
-	public String getWSlocation() {
-		return workshopLocation;
+	public String getName() {
+		return name;
 	}
 
-	public void setWSLocation(String location) {
-		this.workshopLocation = location;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getWorkshopName() {
-		return workshopName;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setWorkshopName(String workshopName) {
-		this.workshopName = workshopName;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public List<ProjectsDTO> getProjects() {
@@ -64,19 +65,6 @@ public class WorkshopDTO {
 		this.projects = projects;
 	}
 
-	public void setPowerTools(List<PowerToolsDTO> ptDTOs) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public String getWorkshopLocation() {
-		return workshopLocation;
-	}
-
-	public void setWorkshopLocation(String workshopLocation) {
-		this.workshopLocation = workshopLocation;
-	}
-
 	public List<PowerToolsDTO> getPowertools() {
 		return powertools;
 	}
@@ -84,5 +72,7 @@ public class WorkshopDTO {
 	public void setPowertools(List<PowerToolsDTO> powertools) {
 		this.powertools = powertools;
 	}
+
+	
 
 }

@@ -47,7 +47,7 @@ public class Workshop {
 		this.id = id;
 		this.name = name;
 		this.address = address;
-		this.project = project;
+		this.project = project; 
 		this.powertools = powertool;
 	}
 

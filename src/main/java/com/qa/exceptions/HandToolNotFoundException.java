@@ -12,7 +12,7 @@ public class HandToolNotFoundException extends RuntimeException{
 	private static final long serialVersionUID = 3572306452491968784L;
 
 	public HandToolNotFoundException() {
-		super();
+		super(); 
 		// TODO Auto-generated constructor stub
 	}
 

@@ -212,7 +212,7 @@ public class PowerToolsTest {
 		@Test
 		void testGetWorkshop() {
 			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
-			Workshop expected = powertool.getWorkshop();
+			List<Workshop> expected = powertool.getWorkshop();
 			assertEquals(expected, null);
 		}
 		
@@ -226,7 +226,7 @@ public class PowerToolsTest {
 		@Test
 		void testGetProjects() {
 			PowerTools powertool = new PowerTools(1, "Drill", "Drilling","very", 115, "No",null, null);
-			Projects expected = powertool.getProject();
+			List<Projects> expected = powertool.getProject();
 			assertEquals(expected, null);
 		}
 	

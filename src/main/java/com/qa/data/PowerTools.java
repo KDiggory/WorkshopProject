@@ -1,5 +1,7 @@
 package com.qa.data;
 
+import java.util.List;
+
 import java.util.Objects;
 
 
@@ -7,9 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.qa.dto.ProjectsDTO;
+import com.qa.dto.WorkshopDTO;
 
 @Entity
 public class PowerTools implements Tools {
@@ -26,22 +33,20 @@ public class PowerTools implements Tools {
 	private String easy;
 	
 	private Integer cost;
-	
+	 
 	private String dangerous;
 	
-	@ManyToOne 
-	private Workshop workshop;
+	@JsonIgnore
+	@OneToMany(mappedBy = "id") 
+	private List<Workshop> workshop;
 	
-	@ManyToOne
-	private Projects project;
-	
-//	@OneToMany	
-//	private Projects project;
-
+	@JsonIgnore
+	@OneToMany(mappedBy = "id")
+	private List<Projects> project;
 	
 
 	public PowerTools(Integer id, String name, String usedFor, String easy, Integer cost, String dangerous,
-			Workshop workshop, Projects project) {
+			List<Workshop> workshop, List<Projects> project) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -105,11 +110,11 @@ public class PowerTools implements Tools {
 		this.dangerous = dangerous;
 	}
 
-	public Workshop getWorkshop() {
+	public List<Workshop> getWorkshop() {
 		return workshop;
 	}
 
-	public void setWorkshop(Workshop workshop) {
+	public void setWorkshop(List<Workshop> workshop) {
 		this.workshop = workshop;
 	}
 
@@ -131,13 +136,13 @@ public class PowerTools implements Tools {
 				&& Objects.equals(easy, other.easy) && Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(usedFor, other.usedFor) && Objects.equals(workshop, other.workshop);
 	}
-	public Projects getProject() {
+	public List<Projects> getProject() {
 		return project;
 	}
-	public void setProject(Projects project) {
+	public void setProject(List<Projects> project) {
 		this.project = project;
 	}
-	
+	 
 
 	
 	 

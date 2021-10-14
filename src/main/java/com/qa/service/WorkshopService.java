@@ -35,20 +35,19 @@ public class WorkshopService {
 	WorkshopDTO mapToDTO(Workshop workshop) {
 		WorkshopDTO dto = new WorkshopDTO();
 		dto.setId(workshop.getId());
-		dto.setWSLocation(workshop.getAddress());
+		dto.setAddress(workshop.getAddress());
+		dto.setName(workshop.getName());
 		List<ProjectsDTO> pDTOs = new ArrayList<>();
 		List<PowerToolsDTO> ptDTOs = new ArrayList<>();
 		
 		for(Projects p : workshop.getProject()) {
-			ProjectsDTO pDTO = new ProjectsDTO();
+			ProjectsDTO pDTO = new ProjectsDTO(); 
 			pDTO.setId(p.getId());
 			pDTO.setDays(p.getDays());
 			pDTO.setEasy(p.getEasy());
 			pDTO.setProjectMaterials(p.getMaterials());
 			pDTO.setProjectName(p.getName());
 			pDTOs.add(pDTO);
-			
-		for(PowerTools pt : workshop.getPowertools());
 			
 		for (PowerTools pt : workshop.getPowertools()) {
 			PowerToolsDTO ptDTO = new PowerToolsDTO();
@@ -62,8 +61,9 @@ public class WorkshopService {
 		}
 		}
 		
-		dto.setPowerTools(ptDTOs);
+		
 		dto.setProjects(pDTOs);
+		dto.setPowertools(ptDTOs);
 		return dto;
 		
 	}
